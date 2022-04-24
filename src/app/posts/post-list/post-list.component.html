@@ -1,1 +1,24 @@
-<p>post-list works!</p>
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-success">New Post</button>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-xs-12">
+    <a href="#"
+       class="list-group-item clearfix"
+       *ngFor="let post of posts">
+      <div class="pull-left">
+        <h5 class="list-group-item-heading">{{post.postLabels}}</h5>
+        <h4 class="list-group-item-heading">{{post.authorId}} [TODO: author username]</h4>
+        <p class="list-group-item-text">{{post.createDate}}</p>
+        <p class="list-group-item-text">{{post.text}}</p>
+        <p class="list-group-item-info">
+          <span class="badge badge-info">{{post.postThumbUpCount}}</span> [TODO: comment count]
+        </p>
+      </div>
+    </a>
+    <app-post-item></app-post-item>
+  </div>
+</div>
