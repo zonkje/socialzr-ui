@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-md-5">
+    <app-group-list></app-group-list>
+  </div>
+  <div class="col-md-7">
+    <app-group-detail
+      *ngIf="selectedGroup; else infoText"
+      [group]="selectedGroup"
+    ></app-group-detail>
+    <ng-template #infoText>
+      <p>Please select a Group!</p>
+    </ng-template>
+  </div>
+</div>

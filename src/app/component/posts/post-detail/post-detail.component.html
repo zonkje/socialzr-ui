@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div
+      class="btn-group"
+      appDropdown>
+      <button
+        type="button"
+        class="btn btn-primary dropdown-toggle">
+        Manage Post<span class="caret" style="margin-left: 3px"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a href="#">Edit Post</a></li>
+        <li><a href="#">Delete Post</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <h4>ID: {{post.id}}</h4>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    {{post.postLabels}}
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <h1>Author: {{post.authorId}}</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    Create: {{post.createDate}}
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    Modified: {{post.lastModifiedDate}}
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    Thumb up's: {{post.postThumbUpCount}}
+  </div>
+</div>
+[TODO: comments -> comment-list -> add comment]
