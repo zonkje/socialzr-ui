@@ -1,4 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+
+import { GroupService } from 'src/app/service/group.service';
 import {Group} from '../../../model/group.model';
 
 @Component({
@@ -7,11 +10,25 @@ import {Group} from '../../../model/group.model';
   styleUrls: ['./group-detail.component.css']
 })
 export class GroupDetailComponent implements OnInit {
-  @Input() group: Group;
+  group: Group;
+  id: number;
 
-  constructor() { }
+  constructor(private groupService: GroupService, 
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
+    const id = this.route.params
+    .subscribe(
+      (params: Params) => {
+        this.id = +params['id'];
+        this.group = this.groupService.getGroup(this.id);
+      }
+    );
+  }
+
+  onEditGroup() {
+    this.router.navigate(['edit'], {relativeTo: this.route});
   }
 
 }

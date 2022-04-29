@@ -1,8 +1,6 @@
 import {Group} from '../model/group.model';
-import {EventEmitter} from '@angular/core';
 
 export class GroupService {
-  groupSelected = new EventEmitter<Group>();
 
   private groups: Group[] = [
     new Group(1, new Date(Date.now() - 259200000).toDateString(),
@@ -20,4 +18,9 @@ export class GroupService {
   getGroups(){
     return this.groups.slice();
   }
+
+  getGroup(index: number){
+    return this.groups[index];
+  }
+
 }

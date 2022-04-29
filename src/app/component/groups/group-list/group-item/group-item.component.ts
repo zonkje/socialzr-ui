@@ -9,14 +9,11 @@ import {GroupService} from '../../../../service/group.service';
 })
 export class GroupItemComponent implements OnInit {
   @Input() group: Group;
+  @Input() index: number;
 
-  constructor(private groupService: GroupService) { }
+  constructor() { }
 
   ngOnInit(): void {
-  }
-
-  onSelected() {
-    this.groupService.groupSelected.emit(this.group);
   }
 
 }

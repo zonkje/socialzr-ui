@@ -1,8 +1,6 @@
 import {Post} from '../model/post.model';
-import {EventEmitter} from '@angular/core';
 
 export class PostService {
-  postSelected = new EventEmitter<Post>();
 
   private posts: Post[] = [
     new Post(1, new Date(Date.now() - 259200000).toDateString(),
@@ -20,4 +18,7 @@ export class PostService {
     return this.posts.slice();
   }
 
+  getPost(index: number){
+    return this.posts[index];
+  }
 }

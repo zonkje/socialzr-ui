@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Group} from '../../model/group.model';
+
 import {GroupService} from '../../service/group.service';
 
 @Component({
@@ -9,17 +9,11 @@ import {GroupService} from '../../service/group.service';
   providers: [GroupService]
 })
 export class GroupsComponent implements OnInit {
-  selectedGroup: Group;
 
-  constructor(private groupService: GroupService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.groupService.groupSelected
-      .subscribe(
-        (group: Group) => {
-          this.selectedGroup = group;
-        }
-      )
+    
   }
 
 }

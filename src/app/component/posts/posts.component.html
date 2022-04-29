@@ -3,13 +3,6 @@
     <app-post-list></app-post-list>
   </div>
   <div class="col-md-7">
-    <app-post-detail
-      *ngIf="selectedPost; else infoText"
-      [post]="selectedPost"
-    >
-    </app-post-detail>
-    <ng-template #infoText>
-      <p>Please select a Post!</p>
-    </ng-template>
+    <router-outlet></router-outlet>
   </div>
 </div>

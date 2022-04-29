@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Post} from '../../../../model/post.model';
-import {PostService} from '../../../../service/post.service';
 
 @Component({
   selector: 'app-post-item',
@@ -9,14 +8,12 @@ import {PostService} from '../../../../service/post.service';
 })
 export class PostItemComponent implements OnInit {
   @Input() post: Post;
+  @Input() index: number;
 
-  constructor(private postService: PostService) {
+  constructor() {
   }
 
   ngOnInit(): void {
   }
 
-  onSelected() {
-    this.postService.postSelected.emit(this.post)
-  }
 }
