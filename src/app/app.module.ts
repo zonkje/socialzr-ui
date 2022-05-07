@@ -13,17 +13,18 @@ import {ReportComponent} from './component/report/report.component';
 import {GroupListComponent} from './component/groups/group-list/group-list.component';
 import {GroupItemComponent} from './component/groups/group-list/group-item/group-item.component';
 import {GroupDetailComponent} from './component/groups/group-detail/group-detail.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UsersComponent} from './component/users/users.component';
 import {UserListComponent} from './component/users/user-list/user-list.component';
 import {UserItemComponent} from './component/users/user-list/user-item/user-item.component';
 import {UserDetailComponent} from './component/users/user-detail/user-detail.component';
 import {DropdownDirective} from './directive/dropdown.directive';
 import {AppRoutingModule} from './app-routing.modue';
-import { PostStartComponent } from './component/posts/post-start/post-start.component';
-import { GroupStartComponent } from './component/groups/group-start/group-start.component';
-import { PostEditComponent } from './component/posts/post-edit/post-edit.component';
-import { GroupEditComponent } from './component/groups/group-edit/group-edit.component';
+import {PostStartComponent} from './component/posts/post-start/post-start.component';
+import {GroupStartComponent} from './component/groups/group-start/group-start.component';
+import {PostEditComponent} from './component/posts/post-edit/post-edit.component';
+import {GroupEditComponent} from './component/groups/group-edit/group-edit.component';
+import {PostService} from './service/post.service';
 
 @NgModule({
   declarations: [
@@ -52,9 +53,10 @@ import { GroupEditComponent } from './component/groups/group-edit/group-edit.com
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [PostService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,36 +1,39 @@
 <div class="row">
-    <div class="col-xs-12">
-        <form>
-            <div class="row">
-                <div class="col-xs-12">
-                    <button type="submit" class="btn btn-success">Save</button>
-                    <button type="submit" class="btn btn-danger">Cancel</button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <label for="text">Text</label>
-                        <input 
-                        type="text"
-                        id="text"
-                        class="form-control"
-                        >
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <label for="labels">Labels</label>
-                        <input 
-                        type="text"
-                        id="labels"
-                        class="form-control"
-                        >
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
+  <div class="col-xs-12">
+    <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-xs-12">
+          <button type="submit" class="btn btn-success" [disabled]="!postForm.valid">Save</button>
+          <button type="submit" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="text">Text</label>
+            <textarea
+              type="text"
+              id="text"
+              class="form-control"
+              rows="3"
+              formControlName="text"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="labels">Labels</label>
+            <input
+              type="text"
+              id="labels"
+              class="form-control"
+              formControlName="labels"
+            >
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>

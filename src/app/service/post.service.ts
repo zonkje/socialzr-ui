@@ -1,6 +1,8 @@
 import {Post} from '../model/post.model';
+import {Subject} from 'rxjs';
 
 export class PostService {
+  postsChanged = new Subject<Post[]>();
 
   private posts: Post[] = [
     new Post(1, new Date(Date.now() - 259200000).toDateString(),
@@ -14,11 +16,27 @@ export class PostService {
       ['LOW', 'TEST'], 4)
   ];
 
-  getPosts(){
+  getPosts() {
     return this.posts.slice();
   }
 
-  getPost(index: number){
+  getPost(index: number) {
     return this.posts[index];
   }
+
+  addPost(post: Post) {
+    this.posts.push(post);
+    this.postsChanged.next(this.posts.slice());
+  }
+
+  updatePost(index: number, newPost: Post) {
+    this.posts[index] = newPost;
+    this.postsChanged.next(this.posts.slice());
+  }
+
+  deletePost(index: number) {
+    this.posts.splice(index, 1);
+    this.postsChanged.next(this.posts.slice());
+  }
+
 }

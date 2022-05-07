@@ -13,7 +13,7 @@ export class PostDetailComponent implements OnInit {
   post: Post;
   id: number;
 
-  constructor(private postService: PostService, 
+  constructor(private postService: PostService,
     private route: ActivatedRoute,
     private router: Router) { }
 
@@ -29,6 +29,11 @@ export class PostDetailComponent implements OnInit {
 
   onEditPost() {
     this.router.navigate(['edit'], {relativeTo: this.route});
+  }
+
+  onDeletePost(){
+    this.postService.deletePost(this.id);
+    this.router.navigate(['/posts']);
   }
 
 }
