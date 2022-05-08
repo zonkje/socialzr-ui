@@ -7,7 +7,7 @@
     <h5 class="list-group-item-heading">{{post.postLabels}}</h5>
     <h4 class="list-group-item-heading">{{post.authorId}} [TODO: author username]</h4>
     <p class="list-group-item-text">{{post.createDate}}</p>
-    <p class="list-group-item-text">{{post.text}}</p>
+    <p class="list-group-item-text">{{post.text | shorten: 60}}</p>
     <p class="list-group-item-info">
       <span class="badge badge-info">{{post.postThumbUpCount}}</span> [TODO: comment count]
     </p>

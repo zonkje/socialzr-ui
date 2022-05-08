@@ -26,6 +26,7 @@ import {PostEditComponent} from './component/posts/post-edit/post-edit.component
 import {GroupEditComponent} from './component/groups/group-edit/group-edit.component';
 import {PostService} from './service/post.service';
 import {GroupService} from './service/group.service';
+import {ShortenPipe} from './pipe/shorten.pipe';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import {GroupService} from './service/group.service';
     PostStartComponent,
     GroupStartComponent,
     PostEditComponent,
-    GroupEditComponent
+    GroupEditComponent,
+    ShortenPipe
   ],
   imports: [
     BrowserModule,
