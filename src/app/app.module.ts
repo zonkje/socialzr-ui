@@ -19,12 +19,13 @@ import {UserListComponent} from './component/users/user-list/user-list.component
 import {UserItemComponent} from './component/users/user-list/user-item/user-item.component';
 import {UserDetailComponent} from './component/users/user-detail/user-detail.component';
 import {DropdownDirective} from './directive/dropdown.directive';
-import {AppRoutingModule} from './app-routing.modue';
+import {AppRoutingModule} from './app-routing.module';
 import {PostStartComponent} from './component/posts/post-start/post-start.component';
 import {GroupStartComponent} from './component/groups/group-start/group-start.component';
 import {PostEditComponent} from './component/posts/post-edit/post-edit.component';
 import {GroupEditComponent} from './component/groups/group-edit/group-edit.component';
 import {PostService} from './service/post.service';
+import {GroupService} from './service/group.service';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,7 @@ import {PostService} from './service/post.service';
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [PostService],
+  providers: [PostService, GroupService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -33,7 +33,7 @@ export class PostDetailComponent implements OnInit {
 
   onDeletePost(){
     this.postService.deletePost(this.id);
-    this.router.navigate(['/posts']);
+    this.router.navigate(['/post']);
   }
 
 }

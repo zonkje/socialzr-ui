@@ -1,1 +1,66 @@
-<p>group edit</p>
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="groupForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-xs-12">
+          <button type="submit" class="btn btn-success" [disabled]="!groupForm.valid">Save</button>
+          <button type="submit" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 15px">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              class="form-control"
+              formControlName="name"
+            >
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea
+              type="text"
+              id="description"
+              class="form-control"
+              rows="2"
+              formControlName="description"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="avatarUrl">Avatar URL</label>
+            <input
+              type="text"
+              id="avatarUrl"
+              class="form-control"
+              formControlName="avatarUrl"
+              #avatarUrl
+            >
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-7">
+          <img [src]="avatarUrl.value" class="img-responsive">
+        </div>
+      </div>
+      <div class="radio" *ngFor="let accessLevel of accessLevels">
+        <label>
+          <input
+            type="radio"
+            formControlName="accessLevel"
+            [value]="accessLevel">{{ accessLevel }}
+        </label>
+      </div>
+    </form>
+  </div>
+</div>

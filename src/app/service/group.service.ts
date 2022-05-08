@@ -1,6 +1,8 @@
 import {Group} from '../model/group.model';
+import {Subject} from 'rxjs';
 
 export class GroupService {
+  groupsChanged = new Subject<Group[]>();
 
   private groups: Group[] = [
     new Group(1, new Date(Date.now() - 259200000).toDateString(),
@@ -15,12 +17,27 @@ export class GroupService {
       'Ohgc8y5mbz9wRn_6BEfegY8EC5-Q&usqp=CAU', 1, 'PUBLIC')
   ];
 
-  getGroups(){
+  getGroups() {
     return this.groups.slice();
   }
 
-  getGroup(index: number){
+  getGroup(index: number) {
     return this.groups[index];
+  }
+
+  addGroup(group: Group) {
+    this.groups.push(group);
+    this.groupsChanged.next(this.groups.slice());
+  }
+
+  updateGroup(index: number, newGroup: Group) {
+    this.groups[index] = newGroup;
+    this.groupsChanged.next(this.groups.slice());
+  }
+
+  deleteGroup(index: number) {
+    this.groups.splice(index, 1);
+    this.groupsChanged.next(this.groups.slice());
   }
 
 }
