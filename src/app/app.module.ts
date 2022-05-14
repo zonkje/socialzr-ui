@@ -21,7 +21,6 @@ import {UserDetailComponent} from './component/users/user-detail/user-detail.com
 import {DropdownDirective} from './directive/dropdown.directive';
 import {AppRoutingModule} from './app-routing.module';
 import {PostStartComponent} from './component/posts/post-start/post-start.component';
-import {GroupStartComponent} from './component/groups/group-start/group-start.component';
 import {PostEditComponent} from './component/posts/post-edit/post-edit.component';
 import {GroupEditComponent} from './component/groups/group-edit/group-edit.component';
 import {PostService} from './service/post.service';
@@ -48,7 +47,6 @@ import {ShortenPipe} from './pipe/shorten.pipe';
     UserDetailComponent,
     DropdownDirective,
     PostStartComponent,
-    GroupStartComponent,
     PostEditComponent,
     GroupEditComponent,
     ShortenPipe

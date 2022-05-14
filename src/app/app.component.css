@@ -1,0 +1,8 @@
+.rcorners {
+  border-radius: 25px;
+  background-color: white;
+}
+
+.container.rcorners {
+  padding: 40px;
+}
