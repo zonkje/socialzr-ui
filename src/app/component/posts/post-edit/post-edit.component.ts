@@ -38,17 +38,17 @@ export class PostEditComponent implements OnInit {
       this.postService.updatePost(this.id, updatedPost);
     } else {
       const newPost = new Post(
-        Math.ceil(Math.random() * 11),
-        new Date(Date.now()).toDateString(),
-        new Date(Date.now()).toDateString(),
+        null,
+        null,
+        null,
         this.postForm.value['text'],
-        Math.ceil(Math.random() * 11),
+        null,
         this.postForm.value['labels'].split(','),
-        Math.ceil(Math.random() * 11),
+        null,
       );
       this.postService.addPost(newPost);
-      this.onCancel();
     }
+    this.onCancel();
   }
 
   onCancel() {
@@ -57,12 +57,12 @@ export class PostEditComponent implements OnInit {
 
   private initForm() {
     let postText = '';
-    let postLabels = [];
+    let postLabels = '';
 
     if (this.editMode) {
       const post = this.postService.getPost(this.id);
       postText = post.text;
-      postLabels = post.postLabels;
+      postLabels = post.postLabels.toString();
     }
 
     this.postForm = new FormGroup({

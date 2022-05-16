@@ -9,8 +9,9 @@
     <app-post-item
       *ngFor="let postEl of posts; let i = index"
       [post]="postEl"
-      [index]="i"
+      [index]="postEl['id']"
     >
     </app-post-item>
+    <p *ngIf="isEmpty">No posts available!</p>
   </div>
 </div>

@@ -1,5 +1,8 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AppRoutingModule} from './app-routing.module';
 
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './component/header/header.component';
@@ -13,13 +16,11 @@ import {ReportComponent} from './component/report/report.component';
 import {GroupListComponent} from './component/groups/group-list/group-list.component';
 import {GroupItemComponent} from './component/groups/group-list/group-item/group-item.component';
 import {GroupDetailComponent} from './component/groups/group-detail/group-detail.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UsersComponent} from './component/users/users.component';
 import {UserListComponent} from './component/users/user-list/user-list.component';
 import {UserItemComponent} from './component/users/user-list/user-item/user-item.component';
 import {UserDetailComponent} from './component/users/user-detail/user-detail.component';
 import {DropdownDirective} from './directive/dropdown.directive';
-import {AppRoutingModule} from './app-routing.module';
 import {PostStartComponent} from './component/posts/post-start/post-start.component';
 import {PostEditComponent} from './component/posts/post-edit/post-edit.component';
 import {GroupEditComponent} from './component/groups/group-edit/group-edit.component';
@@ -55,7 +56,8 @@ import {ShortenPipe} from './pipe/shorten.pipe';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [PostService, GroupService],
   bootstrap: [AppComponent]

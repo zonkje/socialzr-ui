@@ -9,8 +9,9 @@
     <app-group-item
       *ngFor="let groupEl of groups; let i = index"
       [group]="groupEl"
-      [index]="i"
+      [index]="groupEl['id']"
     >
     </app-group-item>
+    <p *ngIf="isEmpty">No groups available!</p>
   </div>
 </div>

@@ -4,6 +4,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {Group} from '../../../model/group.model';
 import {GroupService} from '../../../service/group.service';
 import {Subscription} from 'rxjs';
+import {Post} from '../../../model/post.model';
 
 @Component({
   selector: 'app-group-list',
@@ -13,6 +14,7 @@ import {Subscription} from 'rxjs';
 export class GroupListComponent implements OnInit, OnDestroy {
   groups: Group[];
   subscription: Subscription;
+  isEmpty: boolean = true;
 
   constructor(private groupService: GroupService,
               private router: Router,
@@ -20,13 +22,14 @@ export class GroupListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.groupService.groupsChanged
+    this.groupService.getGroups().subscribe();
+    this.subscription = this.groupService.groupsChanged
       .subscribe(
         (groups: Group[]) => {
           this.groups = groups;
+          this.isEmpty = this.groups.length < 1;
         }
       );
-    this.groups = this.groupService.getGroups();
   }
 
   onNewGroup() {

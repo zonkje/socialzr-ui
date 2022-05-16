@@ -13,6 +13,7 @@ import {Subscription} from 'rxjs';
 export class PostListComponent implements OnInit, OnDestroy {
   posts: Post[];
   subscription: Subscription;
+  isEmpty: boolean = true;
 
   constructor(private postService: PostService,
               private router: Router,
@@ -20,13 +21,14 @@ export class PostListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.postService.postsChanged
+    this.postService.getPosts().subscribe();
+    this.subscription = this.postService.postsChanged
       .subscribe(
         (posts: Post[]) => {
           this.posts = posts;
+          this.isEmpty = this.posts.length < 1;
         }
       );
-    this.posts = this.postService.getPosts();
   }
 
   onNewPost() {

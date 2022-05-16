@@ -1,43 +1,90 @@
 import {Group} from '../model/group.model';
 import {Subject} from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {tap} from 'rxjs/operators';
+import {Injectable} from '@angular/core';
 
+@Injectable()
 export class GroupService {
   groupsChanged = new Subject<Group[]>();
 
-  private groups: Group[] = [
-    new Group(1, new Date(Date.now() - 259200000).toDateString(),
-      new Date(Date.now()).toDateString(), 'Pioneers',
-      'First group created on this page',
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:A' +
-      'Nd9GcSqy0HRIWeom9LxYBWpYIazrY8RHZyaviyK6Q&usqp=CAU', 1, 'PRIVATE'),
-    new Group(2, new Date(Date.now() - (259200000 * 4)).toDateString(),
-      new Date(Date.now()).toDateString(), '2nd Group',
-      'Another created group',
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR74z009L' +
-      'Ohgc8y5mbz9wRn_6BEfegY8EC5-Q&usqp=CAU', 1, 'PUBLIC')
-  ];
+  private groups: Group[] = [];
+
+  constructor(private http: HttpClient) {
+  }
+
+  private bearer: string = 'Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VybmFtZTEiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5Ij' +
+    'oiVVNFUiJ9XSwiaWF0IjoxNjUyNzMyMjQyLCJleHAiOjE2NTYxMDgwMDB9.8WfSXP-necut9wem95awCN-NSOoAdYFQIcg8PQNxPXavDAZeeYUYdICxKNwQNr54';
+
 
   getGroups() {
-    return this.groups.slice();
+    return this.http.get<Group[]>('http://localhost:8080/api/v1/social_group?size=7',
+      {
+        headers: new HttpHeaders()
+          .set('Authorization', this.bearer)
+      }
+    ).pipe(
+      tap(
+        groups => {
+          this.groups = groups;
+          this.groupsChanged.next(this.groups);
+        })
+    );
   }
 
   getGroup(index: number) {
-    return this.groups[index];
+    return this.getGroupById(index);
   }
 
   addGroup(group: Group) {
-    this.groups.push(group);
-    this.groupsChanged.next(this.groups.slice());
+    this.http.post<Group>('http://localhost:8080/api/v1/social_group', group,
+      {
+        headers: new HttpHeaders()
+          .set('Authorization', this.bearer)
+      })
+      .subscribe(
+        response => {
+          this.getGroups().subscribe();
+          this.groupsChanged.next(this.groups);
+        }
+      );
   }
 
   updateGroup(index: number, newGroup: Group) {
-    this.groups[index] = newGroup;
-    this.groupsChanged.next(this.groups.slice());
+    this.http.patch<Group>('http://localhost:8080/api/v1/social_group', newGroup,
+      {
+        headers: new HttpHeaders()
+          .set('Authorization', this.bearer)
+      })
+      .subscribe(
+        response => {
+          this.getGroups().subscribe();
+          this.groupsChanged.next(this.groups);
+        }
+      );
   }
 
   deleteGroup(index: number) {
-    this.groups.splice(index, 1);
-    this.groupsChanged.next(this.groups.slice());
+    this.http.delete('http://localhost:8080/api/v1/social_group/' + index,
+      {
+        headers: new HttpHeaders()
+          .set('Authorization', this.bearer)
+      })
+      .subscribe(
+        response => {
+          this.getGroups().subscribe();
+          this.groupsChanged.next(this.groups);
+        }
+      );
+  }
+
+  private getGroupById(groupId: number): Group {
+    for (let group of this.groups) {
+      if (group.id === groupId) {
+        return group;
+      }
+    }
+    return null;
   }
 
 }

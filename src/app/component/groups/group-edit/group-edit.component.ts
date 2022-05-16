@@ -41,18 +41,18 @@ export class GroupEditComponent implements OnInit {
       this.groupService.updateGroup(this.id, updatedGroup);
     } else {
       const newGroup = new Group(
-        Math.ceil(Math.random() * 11),
-        new Date(Date.now()).toDateString(),
-        new Date(Date.now()).toDateString(),
+        null,
+        null,
+        null,
         this.groupForm.value['name'],
         this.groupForm.value['description'],
         this.groupForm.value['avatarUrl'],
-        Math.ceil(Math.random() * 11),
+        null,
         this.groupForm.value['accessLevel']
       );
       this.groupService.addGroup(newGroup);
-      this.onCancel();
     }
+    this.onCancel();
   }
 
   onCancel() {
