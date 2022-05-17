@@ -27,6 +27,9 @@ import {GroupEditComponent} from './component/groups/group-edit/group-edit.compo
 import {PostService} from './service/post.service';
 import {GroupService} from './service/group.service';
 import {ShortenPipe} from './pipe/shorten.pipe';
+import { LoginComponent } from './component/auth/login/login.component';
+import { RegisterComponent } from './component/auth/register/register.component';
+import { LoadingSpinnerComponent } from './component/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,10 @@ import {ShortenPipe} from './pipe/shorten.pipe';
     PostStartComponent,
     PostEditComponent,
     GroupEditComponent,
-    ShortenPipe
+    ShortenPipe,
+    LoginComponent,
+    RegisterComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,

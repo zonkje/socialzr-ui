@@ -1,4 +1,5 @@
 export class User {
+  //TODO: -add role/isAdmin field
     constructor(
         public id: number,
         public createDate: string,
@@ -6,7 +7,7 @@ export class User {
         public firstName: string,
         public lastName: string,
         public avatarUrl: string,
-        public contactInformationId?: number 
+        public contactInformationId?: number,
       ) {
       }
 }

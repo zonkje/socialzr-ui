@@ -14,6 +14,8 @@ import {UsersComponent} from './component/users/users.component';
 import {GroupListComponent} from './component/groups/group-list/group-list.component';
 import {PostsResolverService} from './service/posts-resolver.service';
 import {GroupsResolverService} from './service/groups-resolver.service';
+import {LoginComponent} from './component/auth/login/login.component';
+import {RegisterComponent} from './component/auth/register/register.component';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'post', pathMatch: 'full'},
@@ -36,6 +38,8 @@ const appRoutes: Routes = [
   {path: 'user', component: UsersComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'report', component: ReportComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
 ];
 
 

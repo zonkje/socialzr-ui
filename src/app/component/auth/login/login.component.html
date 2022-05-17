@@ -1,0 +1,31 @@
+<div class="row center">
+  <h2 style="text-align: center">Log in to Socialzr</h2>
+  <div class="col-xs-12">
+    <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          class="form-control"
+          formControlName="username"
+        >
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          formControlName="password"
+        >
+      </div>
+      <div>
+        <button type="submit" class="btn btn-primary" [disabled]="!signInForm.valid">Sign in</button>
+      </div>
+      <div>
+        Not a Socialzr member? <a routerLink="/register">Sign up here</a>
+      </div>
+    </form>
+  </div>
+</div>
