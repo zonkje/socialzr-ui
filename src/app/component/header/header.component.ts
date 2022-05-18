@@ -11,6 +11,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   isAuthenticated = false;
   private loggedUserSub: Subscription;
+  profileUsername: string;
 
   constructor(private authService: AuthService) {
   }
@@ -19,8 +20,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.loggedUserSub = this.authService.loggedUserData.subscribe(
       loggedUserData => {
         this.isAuthenticated = !!loggedUserData;
+        if(this.isAuthenticated){
+          this.profileUsername = loggedUserData.username;
+        }
       }
     );
+
   }
 
   onLogout(): void {

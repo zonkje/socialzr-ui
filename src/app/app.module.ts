@@ -31,6 +31,7 @@ import {LoginComponent} from './component/auth/login/login.component';
 import {RegisterComponent} from './component/auth/register/register.component';
 import {LoadingSpinnerComponent} from './component/loading-spinner/loading-spinner.component';
 import {AuthInterceptorService} from './service/auth-interceptor.service';
+import {UsersService} from './service/users.service';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,9 @@ import {AuthInterceptorService} from './service/auth-interceptor.service';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [PostService, GroupService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
+  providers: [PostService, GroupService, UsersService,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

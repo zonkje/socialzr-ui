@@ -8,7 +8,7 @@
         <li><a *ngIf="isAuthenticated" routerLinkActive="active" routerLink="/post">Posts</a></li>
         <li><a *ngIf="isAuthenticated" routerLinkActive="active" routerLink="/group">Groups</a></li>
         <li><a *ngIf="isAuthenticated" routerLinkActive="active" routerLink="/user">Users</a></li>
-        <li><a *ngIf="isAuthenticated" routerLinkActive="active" routerLink="/profile">Profile</a></li>
+        <li><a *ngIf="isAuthenticated" routerLinkActive="active" routerLink="/profile">Profile ({{profileUsername}})</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a *ngIf="!isAuthenticated" routerLinkActive="active" routerLink="/login">Log in</a></li>
