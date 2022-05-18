@@ -1,42 +1,79 @@
 <div class="row">
-  <button
-    typ="button"
-    class="btn btn-primary dropdown-toggle">
-    Edit Profile<span class="caret"></span>
-  </button>
-</div>
-<hr>
-<div class="row">
+
   <div class="col-xs-4">
-    <img
-      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBPRqn1hlpfUhwWRZOMvC2Z76lu6m5ZBXoag&usqp=CAU"
-      alt=""
-      class="img-responsive">
-  </div>
-  <div class="col-xs-8">
-    <div class="row">
-      USERNAME
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex flex-column align-items-center text-center">
+          <img src="{{user.avatarUrl}}" alt="User" class="img-thumbnail" width="300">
+          <div class="mt-3">
+            <h3>Username</h3>
+            <p class="text-secondary mb-1">Member since:</p>
+            <p class="text-muted font-size-sm">{{user.createDate | date: 'mediumDate' }}</p>
+            <button class="btn btn-primary">Edit profile</button>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="row">
-      FIRST NAME LAST NAME
-    </div>
   </div>
-</div>
-<div class="row">
-  CREATED
-</div>
-<div class="row">
-  MODIFIED
-</div>
-<div class="row">
-  EMAIL
-</div>
-<div class="row">
-  PHONE
-</div>
-<div class="row">
-  WEB URL'S
-</div>
-<div class="row">
-  ADDRESS, CITY, ZIPCODE, STATE, COUNTRY
+
+  <div class="col-xs-8" style="margin: auto">
+    <div class="card mb-3">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-3">
+            <h5 class="mb-0"><strong>Full Name</strong></h5>
+          </div>
+          <div class="col-sm-9 text-secondary">
+            {{ user.firstName}} {{user.lastName}}
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-sm-3">
+            <h5 class="mb-0"><strong>Email</strong></h5>
+          </div>
+          <div class="col-sm-9 text-secondary">
+            {{ userContactInformation.email }}
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-sm-3">
+            <h5 class="mb-0"><strong>Phone</strong></h5>
+          </div>
+          <div class="col-sm-9 text-secondary">
+            {{ userContactInformation.phoneNumber }}
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-sm-3">
+            <h5 class="mb-0"><strong>Address</strong></h5>
+          </div>
+          <div class="col-sm-9 text-secondary">
+            {{ userContactInformation.address.address }}, {{ userContactInformation.address.zipCode }}
+            {{ userContactInformation.address.city }} ({{ userContactInformation.address.state }}),
+            {{ userContactInformation.address.country }}
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-sm-3">
+            <h5 class="mb-0"><strong>Websites</strong></h5>
+          </div>
+          <div class="col-sm-9 text-secondary">
+            <ul class="list-group">
+              <li
+                *ngFor="let url of userContactInformation.websitesURLs"
+                class="list-group-item "
+                style="border: none"
+              >{{ url }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
 </div>

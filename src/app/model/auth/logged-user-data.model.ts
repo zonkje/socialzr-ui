@@ -1,4 +1,4 @@
-export class SignInResponse {
+export class LoggedUserData {
   constructor(
     public id: string,
     public username: string,

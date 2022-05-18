@@ -6,13 +6,13 @@ import {SignInRequest} from '../model/auth/sign-in-request.model';
 import {BehaviorSubject} from 'rxjs';
 import {tap, timeout} from 'rxjs/operators';
 import {Router} from '@angular/router';
-import {SignInResponse} from '../model/auth/sign-in-response.model';
+import {LoggedUserData} from '../model/auth/logged-user-data.model';
 
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
 
-  loggedUserData = new BehaviorSubject<SignInResponse>(null);
+  loggedUserData = new BehaviorSubject<LoggedUserData>(null);
   token = new BehaviorSubject<string>(null);
   private tokenExpirationTimer: any;
 
@@ -26,7 +26,7 @@ export class AuthService {
 
   //TODO: -setting up auto log out timer after sign in causes bugs. check it out
   signIn(userCredentials: SignInRequest) {
-    return this.http.post<SignInResponse>('http://localhost:8080/api/v1/login',
+    return this.http.post<LoggedUserData>('http://localhost:8080/api/v1/login',
       userCredentials,
       {observe: 'response'})
       .pipe(
@@ -41,7 +41,7 @@ export class AuthService {
 
   //TODO: -calling autoLogout() here causes logout for every app refresh. fix this
   autoLogin() {
-    const loggedUserData: SignInResponse = JSON.parse(localStorage.getItem('loggedUserData'));
+    const loggedUserData: LoggedUserData = JSON.parse(localStorage.getItem('loggedUserData'));
     const token: string = localStorage.getItem('token');
     if (!loggedUserData) {
       return;
@@ -67,7 +67,7 @@ export class AuthService {
   }
 
   autoLogout() {
-    const loggedUserData: SignInResponse = JSON.parse(localStorage.getItem('loggedUserData'));
+    const loggedUserData: LoggedUserData = JSON.parse(localStorage.getItem('loggedUserData'));
     this.tokenExpirationTimer = setTimeout(
       () => {
         this.logOut();
