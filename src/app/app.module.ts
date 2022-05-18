@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from './app-routing.module';
 
@@ -27,9 +27,10 @@ import {GroupEditComponent} from './component/groups/group-edit/group-edit.compo
 import {PostService} from './service/post.service';
 import {GroupService} from './service/group.service';
 import {ShortenPipe} from './pipe/shorten.pipe';
-import { LoginComponent } from './component/auth/login/login.component';
-import { RegisterComponent } from './component/auth/register/register.component';
-import { LoadingSpinnerComponent } from './component/loading-spinner/loading-spinner.component';
+import {LoginComponent} from './component/auth/login/login.component';
+import {RegisterComponent} from './component/auth/register/register.component';
+import {LoadingSpinnerComponent} from './component/loading-spinner/loading-spinner.component';
+import {AuthInterceptorService} from './service/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,7 @@ import { LoadingSpinnerComponent } from './component/loading-spinner/loading-spi
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [PostService, GroupService],
+  providers: [PostService, GroupService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule {

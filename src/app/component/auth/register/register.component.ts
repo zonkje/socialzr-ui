@@ -19,8 +19,6 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(new Date(Date.now()).toISOString().replace('T', ' ')
-      .substring(0, 19));
     let imgUrlRegex = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
 
     this.signUpForm = new FormGroup({
@@ -47,13 +45,11 @@ export class RegisterComponent implements OnInit {
 
     this.authService.signUp(signUpRequestData)
       .subscribe(responseData => {
-        console.log(responseData);
         this.isLoading = false;
         this.router.navigate(['/login']);
       }, error => {
         this.isLoading = false;
-        console.log(error);
-        alert(error.error.messages)
+        alert(error.error.messages);
       });
   }
 

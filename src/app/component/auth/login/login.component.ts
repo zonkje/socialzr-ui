@@ -37,15 +37,13 @@ export class LoginComponent implements OnInit {
 
     this.authService.signIn(signInRequest)
       .subscribe(responseData => {
-      console.log(responseData);
-      this.isLoading = false;
+        this.isLoading = false;
         this.router.navigate(['/']);
 
-    }, error => {
-      this.isLoading = false;
-      console.log(error);
-      alert(error.error.messages)
-    });
+      }, error => {
+        this.isLoading = false;
+        alert(error.error.messages);
+      });
 
   }
 

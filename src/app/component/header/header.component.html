@@ -1,18 +1,19 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a href="#" class="navbar-brand">SOCIALZR</a>
+      <a routerLink="/" class="navbar-brand">SOCIALZR</a>
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><a routerLinkActive="active" routerLink="/post">Posts</a></li>
-        <li><a routerLinkActive="active" routerLink="/group">Groups</a></li>
-        <li><a routerLinkActive="active" routerLink="/user">Users</a></li>
-        <li><a routerLinkActive="active" routerLink="/profile">Profile</a></li>
+        <li><a *ngIf="isAuthenticated" routerLinkActive="active" routerLink="/post">Posts</a></li>
+        <li><a *ngIf="isAuthenticated" routerLinkActive="active" routerLink="/group">Groups</a></li>
+        <li><a *ngIf="isAuthenticated" routerLinkActive="active" routerLink="/user">Users</a></li>
+        <li><a *ngIf="isAuthenticated" routerLinkActive="active" routerLink="/profile">Profile</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a routerLinkActive="active" routerLink="/login">Log in</a></li>
-        <li><a routerLinkActive="active" routerLink="/register">Sign up</a></li>
+        <li><a *ngIf="!isAuthenticated" routerLinkActive="active" routerLink="/login">Log in</a></li>
+        <li><a *ngIf="!isAuthenticated" routerLinkActive="active" routerLink="/register">Sign up</a></li>
+        <li><a *ngIf="isAuthenticated" style="cursor: pointer" (click)="onLogout()">Logout</a></li>
       </ul>
     </div>
   </div>

@@ -13,23 +13,15 @@ export class GroupService {
   constructor(private http: HttpClient) {
   }
 
-  private bearer: string = 'Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VybmFtZTEiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5Ij' +
-    'oiVVNFUiJ9XSwiaWF0IjoxNjUyNzMyMjQyLCJleHAiOjE2NTYxMDgwMDB9.8WfSXP-necut9wem95awCN-NSOoAdYFQIcg8PQNxPXavDAZeeYUYdICxKNwQNr54';
-
-
   getGroups() {
-    return this.http.get<Group[]>('http://localhost:8080/api/v1/social_group?size=7',
-      {
-        headers: new HttpHeaders()
-          .set('Authorization', this.bearer)
-      }
-    ).pipe(
-      tap(
-        groups => {
-          this.groups = groups;
-          this.groupsChanged.next(this.groups);
-        })
-    );
+    return this.http.get<Group[]>('http://localhost:8080/api/v1/social_group?size=7')
+      .pipe(
+        tap(
+          groups => {
+            this.groups = groups;
+            this.groupsChanged.next(this.groups);
+          })
+      );
   }
 
   getGroup(index: number) {
@@ -37,11 +29,7 @@ export class GroupService {
   }
 
   addGroup(group: Group) {
-    this.http.post<Group>('http://localhost:8080/api/v1/social_group', group,
-      {
-        headers: new HttpHeaders()
-          .set('Authorization', this.bearer)
-      })
+    this.http.post<Group>('http://localhost:8080/api/v1/social_group', group)
       .subscribe(
         response => {
           this.getGroups().subscribe();
@@ -51,11 +39,7 @@ export class GroupService {
   }
 
   updateGroup(index: number, newGroup: Group) {
-    this.http.patch<Group>('http://localhost:8080/api/v1/social_group', newGroup,
-      {
-        headers: new HttpHeaders()
-          .set('Authorization', this.bearer)
-      })
+    this.http.patch<Group>('http://localhost:8080/api/v1/social_group', newGroup)
       .subscribe(
         response => {
           this.getGroups().subscribe();
@@ -65,11 +49,7 @@ export class GroupService {
   }
 
   deleteGroup(index: number) {
-    this.http.delete('http://localhost:8080/api/v1/social_group/' + index,
-      {
-        headers: new HttpHeaders()
-          .set('Authorization', this.bearer)
-      })
+    this.http.delete('http://localhost:8080/api/v1/social_group/' + index)
       .subscribe(
         response => {
           this.getGroups().subscribe();
