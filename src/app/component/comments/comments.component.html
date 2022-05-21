@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-xs-12">
+    <app-comment-list
+    [postId]="postId"
+    ></app-comment-list>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-success" (click)="onNewComment()">New Comment</button>
+    <app-comment-edit></app-comment-edit>
+  </div>
+</div>

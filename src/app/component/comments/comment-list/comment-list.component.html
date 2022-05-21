@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-xs-12">
+    <app-comment-item
+      *ngFor="let commentEl of comments"
+      [comment]="commentEl"
+    >
+    </app-comment-item>
+  </div>
+  <div class="col-xs-12">
+    <p *ngIf="isEmpty">No comments available!</p>
+  </div>
+</div>

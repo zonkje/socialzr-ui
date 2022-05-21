@@ -32,6 +32,11 @@ import {RegisterComponent} from './component/auth/register/register.component';
 import {LoadingSpinnerComponent} from './component/loading-spinner/loading-spinner.component';
 import {AuthInterceptorService} from './service/auth-interceptor.service';
 import {UsersService} from './service/users.service';
+import {CommentService} from './service/comment.service';
+import { CommentsComponent } from './component/comments/comments.component';
+import { CommentListComponent } from './component/comments/comment-list/comment-list.component';
+import { CommentItemComponent } from './component/comments/comment-list/comment-item/comment-item.component';
+import { CommentEditComponent } from './component/comments/comment-edit/comment-edit.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +63,11 @@ import {UsersService} from './service/users.service';
     ShortenPipe,
     LoginComponent,
     RegisterComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    CommentsComponent,
+    CommentListComponent,
+    CommentItemComponent,
+    CommentEditComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +76,7 @@ import {UsersService} from './service/users.service';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [PostService, GroupService, UsersService,
+  providers: [PostService, GroupService, UsersService, CommentService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
   ],
   bootstrap: [AppComponent]

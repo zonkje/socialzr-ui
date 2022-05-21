@@ -40,9 +40,22 @@
     Modified: {{post.lastModifiedDate}}
   </div>
 </div>
+<hr/>
+<div class="row">
+  <div class="col-xs-12">
+    <h4>{{post.text}}</h4>
+  </div>
+</div>
 <div class="row">
   <div class="col-xs-12">
     Thumb up's: {{post.postThumbUpCount}}
   </div>
 </div>
-[TODO: comments -> comment-list -> add comment]
+<hr/>
+<div class="row">
+  <div class="col-xs-12">
+    <app-comments
+      [postId]="id"
+    ></app-comments>
+  </div>
+</div>
