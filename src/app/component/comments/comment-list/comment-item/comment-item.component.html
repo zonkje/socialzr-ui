@@ -7,7 +7,7 @@
     </div>
     <div class="media-body">
       <h4 class="media-heading">username id#{{comment.authorId}} <small><i>Posted
-        on {{comment.createDate}}</i></small></h4>
+        {{comment.createDate | dateAgo }}</i></small></h4>
       <p>{{comment.text}}</p>
     </div>
     <div class="media-right">

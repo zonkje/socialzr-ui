@@ -37,6 +37,7 @@ import { CommentsComponent } from './component/comments/comments.component';
 import { CommentListComponent } from './component/comments/comment-list/comment-list.component';
 import { CommentItemComponent } from './component/comments/comment-list/comment-item/comment-item.component';
 import { CommentEditComponent } from './component/comments/comment-edit/comment-edit.component';
+import {TimeAgoPipe} from './pipe/time-ago.pipe';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { CommentEditComponent } from './component/comments/comment-edit/comment-
     CommentsComponent,
     CommentListComponent,
     CommentItemComponent,
-    CommentEditComponent
+    CommentEditComponent,
+    TimeAgoPipe
   ],
   imports: [
     BrowserModule,
