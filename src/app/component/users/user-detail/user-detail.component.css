@@ -1,0 +1,16 @@
+.profile-img {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, .5)
+}
+
+.rcorners {
+  border-radius: 10px;
+  background-color: white;
+}
+
+#username {
+  color: #b63838;
+}
+
+#avatar {
+  justify-content: center;
+}

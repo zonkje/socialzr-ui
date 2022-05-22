@@ -6,8 +6,8 @@ import {tap} from 'rxjs/operators';
 
 @Injectable()
 export class PostService {
-  postsChanged = new Subject<Post[]>();
 
+  postsChanged = new Subject<Post[]>();
   private posts: Post[] = [];
 
   constructor(private http: HttpClient) {

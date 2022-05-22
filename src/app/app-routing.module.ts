@@ -17,11 +17,14 @@ import {GroupsResolverService} from './service/groups-resolver.service';
 import {LoginComponent} from './component/auth/login/login.component';
 import {RegisterComponent} from './component/auth/register/register.component';
 import {AuthGuard} from './guard/auth.guard';
+import {UserStartComponent} from './component/users/user-start/user-start.component';
+import {UserDetailComponent} from './component/users/user-detail/user-detail.component';
+import {UsersResolverService} from './service/users-resolver.service';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'post', pathMatch: 'full'},
   {
-    path: 'post', component: PostsComponent, canActivate: [AuthGuard] ,children: [
+    path: 'post', component: PostsComponent, canActivate: [AuthGuard], children: [
       {path: '', component: PostStartComponent},
       {path: 'new', component: PostEditComponent},
       {path: ':id', component: PostDetailComponent, resolve: [PostsResolverService]},
@@ -36,7 +39,12 @@ const appRoutes: Routes = [
       {path: ':id/edit', component: GroupEditComponent, resolve: [GroupsResolverService]}
     ]
   },
-  {path: 'user', component: UsersComponent, canActivate: [AuthGuard]},
+  {
+    path: 'user', component: UsersComponent, canActivate: [AuthGuard], children: [
+      {path: '', component: UserStartComponent},
+      {path: ':id', component: UserDetailComponent, resolve: [UsersResolverService]}
+    ]
+  },
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   {path: 'report', component: ReportComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
@@ -46,7 +54,7 @@ const appRoutes: Routes = [
 
 
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes)],
+  imports: [RouterModule.forRoot(appRoutes, {scrollPositionRestoration: 'enabled'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

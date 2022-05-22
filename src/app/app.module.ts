@@ -31,13 +31,14 @@ import {LoginComponent} from './component/auth/login/login.component';
 import {RegisterComponent} from './component/auth/register/register.component';
 import {LoadingSpinnerComponent} from './component/loading-spinner/loading-spinner.component';
 import {AuthInterceptorService} from './service/auth-interceptor.service';
-import {UsersService} from './service/users.service';
+import {UserService} from './service/user.service';
 import {CommentService} from './service/comment.service';
-import { CommentsComponent } from './component/comments/comments.component';
-import { CommentListComponent } from './component/comments/comment-list/comment-list.component';
-import { CommentItemComponent } from './component/comments/comment-list/comment-item/comment-item.component';
-import { CommentEditComponent } from './component/comments/comment-edit/comment-edit.component';
+import {CommentsComponent} from './component/comments/comments.component';
+import {CommentListComponent} from './component/comments/comment-list/comment-list.component';
+import {CommentItemComponent} from './component/comments/comment-list/comment-item/comment-item.component';
+import {CommentEditComponent} from './component/comments/comment-edit/comment-edit.component';
 import {TimeAgoPipe} from './pipe/time-ago.pipe';
+import {UserStartComponent} from './component/users/user-start/user-start.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import {TimeAgoPipe} from './pipe/time-ago.pipe';
     CommentListComponent,
     CommentItemComponent,
     CommentEditComponent,
-    TimeAgoPipe
+    TimeAgoPipe,
+    UserStartComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +80,7 @@ import {TimeAgoPipe} from './pipe/time-ago.pipe';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [PostService, GroupService, UsersService, CommentService,
+  providers: [PostService, GroupService, UserService, CommentService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
   ],
   bootstrap: [AppComponent]

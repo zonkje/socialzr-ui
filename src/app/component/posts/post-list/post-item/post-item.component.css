@@ -2,3 +2,8 @@
   border-radius: 25px;
   background-color: white;
 }
+.active-post, .active-post:hover {
+  border-width: 3px;
+  border-color: indianred;
+  background-color: #F9EAEA;
+}

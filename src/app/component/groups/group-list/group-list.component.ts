@@ -4,7 +4,6 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {Group} from '../../../model/group.model';
 import {GroupService} from '../../../service/group.service';
 import {Subscription} from 'rxjs';
-import {Post} from '../../../model/post.model';
 
 @Component({
   selector: 'app-group-list',

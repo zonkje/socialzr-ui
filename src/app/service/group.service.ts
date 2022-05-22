@@ -1,13 +1,13 @@
 import {Group} from '../model/group.model';
 import {Subject} from 'rxjs';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {tap} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 
 @Injectable()
 export class GroupService {
-  groupsChanged = new Subject<Group[]>();
 
+  groupsChanged = new Subject<Group[]>();
   private groups: Group[] = [];
 
   constructor(private http: HttpClient) {

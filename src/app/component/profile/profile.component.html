@@ -6,7 +6,7 @@
         <div class="d-flex flex-column align-items-center text-center">
           <img src="{{user.avatarUrl}}" alt="User" class="img-thumbnail" width="300">
           <div class="mt-3">
-            <h3>Username</h3>
+            <h3>{{user.username}}</h3>
             <p class="text-secondary mb-1">Member since:</p>
             <p class="text-muted font-size-sm">{{user.createDate | date: 'mediumDate' }}</p>
             <button class="btn btn-primary">Edit profile</button>
@@ -67,7 +67,7 @@
                 *ngFor="let url of userContactInformation.websitesURLs"
                 class="list-group-item "
                 style="border: none"
-              >{{ url }}</li>
+              ><a href='http://{{url}}'>{{ url }}</a></li>
             </ul>
           </div>
         </div>

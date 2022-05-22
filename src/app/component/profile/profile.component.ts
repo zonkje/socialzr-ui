@@ -1,19 +1,21 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {User} from '../../model/user.model';
-import {UsersService} from '../../service/users.service';
+import {UserService} from '../../service/user.service';
 import {UserContactInformation} from '../../model/user-contact-information.model';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
 
   user: User;
+  subscription: Subscription;
   userContactInformation: UserContactInformation;
 
-  constructor(private userService: UsersService) {
+  constructor(private userService: UserService) {
   }
 
   //TODO -I get undefined before and after subscribing (due to async)
@@ -22,24 +24,30 @@ export class ProfileComponent implements OnInit {
   }
 
   private getUser() {
-    this.userService.getCurrentUser().subscribe((user: User) => {
-      this.user = user;
-      if(this.user.contactInformationId) {
-        this.getUserContactInformation(this.user.contactInformationId);
-      }
-      console.log(this.user);
-      console.log(this.userContactInformation);
-    });
+    this.userService.getCurrentUser().subscribe();
+    this.subscription = this.userService.userChanged
+      .subscribe(
+        (user: User) => {
+        this.user = user;
+        if (this.user.contactInformationId) {
+          this.getUserContactInformation(this.user.contactInformationId);
+        }
+      });
   }
 
   private getUserContactInformation(contactInformationId: number) {
-    this.userService.getCurrentUserContactInformation(contactInformationId)
+    this.userService.getUserContactInformation(contactInformationId)
       .subscribe(
         (contactInfo: UserContactInformation) => {
           this.userContactInformation = contactInfo;
-          console.log(contactInfo);
         }
       );
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
 }

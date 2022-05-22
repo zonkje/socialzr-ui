@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 
-import { PostService } from 'src/app/service/post.service';
+import {PostService} from 'src/app/service/post.service';
 import {Post} from '../../../model/post.model';
 
 @Component({
@@ -14,24 +14,25 @@ export class PostDetailComponent implements OnInit {
   id: number;
 
   constructor(private postService: PostService,
-    private route: ActivatedRoute,
-    private router: Router) { }
+              private route: ActivatedRoute,
+              private router: Router) {
+  }
 
   ngOnInit(): void {
     const id = this.route.params
-    .subscribe(
-      (params: Params) => {
-        this.id = +params['id'];
-        this.post = this.postService.getPost(this.id);
-      }
-    );
+      .subscribe(
+        (params: Params) => {
+          this.id = +params['id'];
+          this.post = this.postService.getPost(this.id);
+        }
+      );
   }
 
   onEditPost() {
     this.router.navigate(['edit'], {relativeTo: this.route});
   }
 
-  onDeletePost(){
+  onDeletePost() {
     this.postService.deletePost(this.id);
     this.router.navigate(['/post']);
   }

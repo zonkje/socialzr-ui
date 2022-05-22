@@ -1,1 +1,56 @@
-<p>user-detail works!</p>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel rcorners panel-default">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-xs-6">
+            <h2 id="username"><b><span class="glyphicon glyphicon-user"></span> {{user.firstName}} {{user.lastName}}</b>
+            </h2>
+            <p class="text-muted h5">@{{user.username}}</p>
+            <hr>
+            <div class="row">
+              <div class="col-xs-5">
+                <strong><span class="glyphicon glyphicon-envelope"></span> email: </strong>
+              </div>
+              <div class="col-xs-7">
+                <p> --- </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-5">
+                <strong><span class="glyphicon glyphicon-earphone"></span> phone: </strong>
+              </div>
+              <div class="col-xs-7">
+                <p> --- </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-5">
+                <strong><span class="glyphicon glyphicon-globe"></span> websites: </strong>
+              </div>
+              <div class="col-xs-7">
+                <p> --- </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-5">
+                <strong><span class="glyphicon glyphicon-pushpin"></span> address: </strong>
+              </div>
+              <div class="col-xs-7">
+                <p> --- </p>
+              </div>
+            </div>
+          </div>
+          <div id="avatar" class="col-xs-6">
+            <div class="row">
+              <img src="{{user.avatarUrl}}" alt="" class="center-block img-circle img-responsive profile-img">
+            </div>
+            <div class="row" style="text-align: center; margin-top: 25px;">
+              <p class="text-muted mb-1">Member since {{user.createDate | date: 'mediumDate' }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

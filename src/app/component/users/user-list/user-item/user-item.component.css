@@ -1,0 +1,15 @@
+.rcorners {
+  border-radius: 10px;
+  background-color: white;
+}
+.active-user, .active-user:hover {
+  border-width: 3px;
+  border-color: indianred;
+  background-color: #F9EAEA;
+}
+
+#user-tile {
+  width: 130px;
+  margin: 5px;
+  justify-content: center;
+}
