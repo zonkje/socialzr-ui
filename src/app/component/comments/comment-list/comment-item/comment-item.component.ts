@@ -12,10 +12,22 @@ import {User} from '../../../../model/user.model';
 export class CommentItemComponent implements OnInit, OnDestroy {
 
   @Input() comment: PostComment;
+  user: User;
 
-  constructor(private usersService: UserService) { }
+  constructor(private userService: UserService) {
+  }
 
   ngOnInit(): void {
+    this.getUser();
+  }
+
+  public getUser(): void {
+    this.userService.getCurrentUser()
+      .subscribe(
+        (user: User) => {
+          this.user = user;
+        }
+      );
   }
 
   ngOnDestroy(): void {

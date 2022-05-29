@@ -34,7 +34,7 @@ export class UserService {
   }
 
   getCurrentUser() {
-    const currentUser: LoggedUserData = JSON.parse(localStorage.getItem('loggedUserData'));
+    let currentUser: LoggedUserData = JSON.parse(localStorage.getItem('loggedUserData'));
     return this.http.get<User>('http://localhost:8080/api/v1/user/' + currentUser.id)
       .pipe(
         tap(
