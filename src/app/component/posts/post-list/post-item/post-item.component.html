@@ -3,13 +3,21 @@
   [routerLink]="[index]"
   routerLinkActive="active-post"
   class="list-group-item clearfix rcorners">
-  <div class="pull-left">
-    <h5 class="list-group-item-heading">{{post.postLabels}}</h5>
-    <h4 class="list-group-item-heading">{{post.authorId}} [TODO: author username]</h4>
-    <p class="list-group-item-text">Posted {{post.createDate | dateAgo }}</p>
-    <p class="list-group-item-text">{{post.text | shorten: 60}}</p>
-    <p class="list-group-item-info">
-      <span class="badge badge-info">{{post.postThumbUpCount}}</span> [TODO: comment count]
-    </p>
+  <div class="media">
+    <div class="media-left">
+      <img src="https://sociuu.com/wp-content/themes/Sociuu/assets/images/author-default.png" class="media-object"
+           style="width:90px">
+    </div>
+    <div class="media-body">
+      <h6 class="media-heading">{{post.postLabels}}</h6>
+      <h4 class="media-heading">username</h4>
+      <small><i>Posted {{post.createDate | dateAgo }}</i></small>
+      <p>{{post.text | shorten: 40}}</p>
+    </div>
+    <div class="media-right">
+      <div class="well">
+        Thumb Up's {{post.postThumbUpCount}}
+      </div>
+    </div>
   </div>
 </a>

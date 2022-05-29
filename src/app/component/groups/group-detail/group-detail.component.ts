@@ -12,6 +12,7 @@ import {Group} from '../../../model/group.model';
 export class GroupDetailComponent implements OnInit {
   group: Group;
   id: number;
+  loggedUserId: number;
 
   constructor(private groupService: GroupService,
               private route: ActivatedRoute,
@@ -19,6 +20,7 @@ export class GroupDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loggedUserId = JSON.parse(localStorage.getItem('loggedUserData'))['id']
     const id = this.route.params
       .subscribe(
         (params: Params) => {

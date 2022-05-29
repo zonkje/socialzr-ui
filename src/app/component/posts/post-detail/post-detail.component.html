@@ -5,7 +5,9 @@
       appDropdown>
       <button
         type="button"
-        class="btn btn-primary dropdown-toggle">
+        class="btn btn-primary dropdown-toggle"
+        [class.disabled]= "post.authorId != loggedUserId"
+      >
         Manage Post<span class="caret" style="margin-left: 3px"></span>
       </button>
       <ul class="dropdown-menu">
@@ -27,17 +29,17 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <h1>Author: {{post.authorId}}</h1>
+    <h1>Author: # username # @{{post.authorId}}</h1>
   </div>
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <i>Create: {{post.createDate}} </i>
+    <i>Create: {{post.createDate | date:'longDate' }} </i>
   </div>
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <i>Modified: {{post.lastModifiedDate}}</i>
+    <i>Modified: {{post.lastModifiedDate | date:'longDate'}}</i>
   </div>
 </div>
 <hr/>

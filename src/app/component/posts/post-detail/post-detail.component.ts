@@ -12,6 +12,7 @@ import {Post} from '../../../model/post.model';
 export class PostDetailComponent implements OnInit {
   post: Post;
   id: number;
+  loggedUserId: number;
 
   constructor(private postService: PostService,
               private route: ActivatedRoute,
@@ -19,6 +20,7 @@ export class PostDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loggedUserId = JSON.parse(localStorage.getItem('loggedUserData'))['id']
     const id = this.route.params
       .subscribe(
         (params: Params) => {

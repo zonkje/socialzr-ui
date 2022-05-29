@@ -5,7 +5,9 @@
       appDropdown>
       <button
         type="button"
-        class="btn btn-primary dropdown-toggle">
+        class="btn btn-primary dropdown-toggle"
+        [class.disabled]= "group.creatorId != loggedUserId"
+      >
         Manage Group<span class="caret" style="margin-left: 3px"></span>
       </button>
       <ul class="dropdown-menu" appDropdown>
@@ -15,42 +17,75 @@
     </div>
   </div>
 </div>
-<div class="col-xs-8">
-  <div class="row">
-    <div class="col-xs-12">
-      <h4>ID: {{group.id}}</h4>
+<hr>
+<div class="row">
+  <div class="col-xs-8">
+    <div class="row">
+      <div class="col-xs-8 pull-right">
+        <ul class="list-inline">
+          <li class="list-inline-item"><p style="font-size: 50px"><strong>{{group.name}}</strong></p></li>
+          <li class="list-inline-item"><small class="text-muted"> GROUP ID: {{group.id}}</small></li>
+        </ul>
+      </div>
+    </div>
+    <div class="card mb-3">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-3">
+            <h5 class="mb-0"><strong>Created</strong></h5>
+          </div>
+          <div class="col-sm-9 text-secondary">
+            {{ group.createDate | date:'longDate'}}
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-sm-3">
+            <h5 class="mb-0"><strong>Modified</strong></h5>
+          </div>
+          <div class="col-sm-9 text-secondary">
+            {{ group.lastModifiedDate | date:'longDate'}}
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-sm-3">
+            <h5 class="mb-0"><strong>Access level</strong></h5>
+          </div>
+          <div class="col-sm-9 text-secondary">
+            {{ group.accessLevel }}
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-sm-3">
+            <h5 class="mb-0"><strong>Description</strong></h5>
+          </div>
+          <div class="col-sm-9 text-secondary">
+            {{ group.description }}
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-sm-3">
+            <h5 class="mb-0"><strong>Creator</strong></h5>
+          </div>
+          <div class="col-sm-9 text-secondary">
+            {{ group.creatorId }} # creator username here #
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-xs-8">
-      <h1>Name: {{group.name}}</h1>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      Access level: {{group.accessLevel}}
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      Created: {{group.createDate}}
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      Modified: {{group.lastModifiedDate}}
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      Description: {{group.description}}
+  <div class="col-xs-4">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex flex-column align-items-center text-center">
+          <img src="{{group.avatarUrl}}" alt="User" class="img-thumbnail" width="300">
+        </div>
+      </div>
     </div>
   </div>
 </div>
-<div class="col-xs-4">
-  <img
-    src="{{group.avatarUrl}}"
-    alt=""
-    class="img-responsive">
-</div>
-[TODO: group posts -> group posts-list -> add group posts]
+
+<p class="text-muted"><small># add group posts, add group members #</small></p>
