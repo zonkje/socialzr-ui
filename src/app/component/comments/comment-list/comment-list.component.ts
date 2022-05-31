@@ -2,6 +2,7 @@ import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@an
 import {Subscription} from 'rxjs';
 import {CommentService} from '../../../service/comment.service';
 import {PostComment} from '../../../model/post-comment.model';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-comment-list',
@@ -14,10 +15,21 @@ export class CommentListComponent implements OnInit, OnChanges, OnDestroy {
   subscription: Subscription;
   isEmpty: boolean = true;
 
-  constructor(private commentService: CommentService) {
+  constructor(private commentService: CommentService,
+              private router: Router,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    this.getComments();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.getComments();
+  }
+
+
+  private getComments() {
     this.subscription = this.commentService.getCommentsByPost(this.postId)
       .subscribe((comments: PostComment[]) => {
         this.comments = comments;
@@ -25,14 +37,8 @@ export class CommentListComponent implements OnInit, OnChanges, OnDestroy {
       });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-
-    this.subscription = this.commentService.getCommentsByPost(this.postId)
-      .subscribe((comments: PostComment[]) => {
-        this.comments = comments;
-        this.isEmpty = this.comments.length < 1;
-      });
-
+  onNewComment() {
+    this.router.navigate(['comment/new'], {relativeTo: this.route});
   }
 
   ngOnDestroy(): void {
@@ -40,4 +46,5 @@ export class CommentListComponent implements OnInit, OnChanges, OnDestroy {
       this.subscription.unsubscribe();
     }
   }
+
 }

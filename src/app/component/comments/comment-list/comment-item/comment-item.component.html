@@ -2,11 +2,11 @@
   class="list-group-item clearfix rcorners">
   <div class="media">
     <div class="media-left">
-      <img src="{{user.avatarUrl}}" class="media-object img-circle"
+      <img src="{{user?.avatarUrl}}" class="media-object img-circle"
            style="width:40px">
     </div>
     <div class="media-body">
-      <h4 class="media-heading">{{user.username}} <small><i>Posted
+      <h4 class="media-heading">{{user?.username}} <small><i>Posted
         {{comment.createDate | dateAgo }}</i></small></h4>
       <p>{{comment.text}}</p>
     </div>

@@ -21,7 +21,7 @@ export class CommentItemComponent implements OnInit, OnDestroy {
     this.getUser();
   }
 
-  public getUser(): void {
+  private getUser(): void {
     this.userService.getCurrentUser()
       .subscribe(
         (user: User) => {

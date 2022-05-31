@@ -24,4 +24,14 @@ export class CommentService {
       );
   }
 
+  addComment(comment: PostComment) {
+    this.http.post<PostComment>('http://localhost:8080/api/v1/comment', comment)
+      .subscribe(
+        response => {
+          this.getCommentsByPost(response.postId).subscribe();
+          this.commentsChanged.next(this.comments);
+        }
+      );
+  }
+
 }

@@ -5,7 +5,7 @@ import {PostComment} from '../model/post-comment.model';
 import {CommentService} from './comment.service';
 
 @Injectable({providedIn: 'root'})
-export class CommentssResolverService implements Resolve<PostComment[]> {
+export class CommentsResolverService implements Resolve<PostComment[]> {
 
   constructor(private commentService: CommentService) {
   }

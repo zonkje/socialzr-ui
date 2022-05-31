@@ -6,7 +6,7 @@
       <button
         type="button"
         class="btn btn-primary dropdown-toggle"
-        [class.disabled]= "post.authorId != loggedUserId"
+        [class.disabled]="post.authorId != loggedUserId"
       >
         Manage Post<span class="caret" style="margin-left: 3px"></span>
       </button>
@@ -22,31 +22,33 @@
   <div class="col-xs-12">
     <ul class=" list-unstyled" style="display: flex;">
       <li *ngFor="let label of post.postLabels" style="width: 100%; padding: 5px; ">
-        <span id="post-label" class="label label-info" >{{label}}</span>
+        <span id="post-label" class="label label-info">{{label}}</span>
       </li>
     </ul>
   </div>
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <h1>Author: # username # @{{post.authorId}}</h1>
+    <div class="pull-right">
+      <div class="media">
+        <div class="media-right">
+          <h3><span class="glyphicon glyphicon-user"></span> {{user?.firstName}} {{user?.lastName}}</h3>
+          <h4 class="text-right text-danger">@{{user?.username}}</h4>
+        </div>
+        <div class="media-right">
+          <img src="{{user?.avatarUrl}}" class="media-object img-thumbnail" style="width:150px">
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-<div class="row">
-  <div class="col-xs-12">
-    <i>Create: {{post.createDate | date:'longDate' }} </i>
-  </div>
-</div>
-<div class="row">
-  <div class="col-xs-12">
-    <i>Modified: {{post.lastModifiedDate | date:'longDate'}}</i>
-  </div>
-</div>
+
 <hr/>
 <div class="row">
   <div class="col-xs-12">
     <div class="card" style="margin-bottom: 5px">
-      <h4 style="margin-bottom: 30px">{{post.text}}</h4>
+      <h3 style="margin-bottom: 30px">{{post.text}}</h3>
+      <h6>Created: {{post.createDate | date:'longDate' }} </h6>
       <button type="button" class="btn btn-default btn-lg">
         <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> {{post.postThumbUpCount}}
       </button>

@@ -1,1 +1,28 @@
-<p class="text-muted"><small># new/edit comment component here #</small></p>
+<div class="row" id="targetNewComment">
+  <div class="col-xs-12">
+    <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+      <div class="row" style="margin-top: 15px">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="text">Comment text</label>
+            <textarea
+              type="text"
+              id="text"
+              class="form-control"
+              placeholder="Any comment?"
+              rows="2"
+              formControlName="text"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <button type="submit" class="btn btn-success" [disabled]="!commentForm.valid">Save</button>
+          |
+          <button type="submit" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

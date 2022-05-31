@@ -16,10 +16,4 @@ export class CommentsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
-
-  onNewComment() {
-
-  }
-
 }

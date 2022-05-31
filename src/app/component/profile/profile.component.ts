@@ -18,21 +18,20 @@ export class ProfileComponent implements OnInit, OnDestroy {
   constructor(private userService: UserService) {
   }
 
-  //TODO -I get undefined before and after subscribing (due to async)
   ngOnInit(): void {
     this.getUser();
   }
 
   private getUser() {
     this.userService.getCurrentUser().subscribe();
-    this.subscription = this.userService.userChanged
+    this.subscription = this.userService.currentUserChanged
       .subscribe(
         (user: User) => {
-        this.user = user;
-        if (this.user.contactInformationId) {
-          this.getUserContactInformation(this.user.contactInformationId);
-        }
-      });
+          this.user = user;
+          if (this.user.contactInformationId) {
+            this.getUserContactInformation(this.user.contactInformationId);
+          }
+        });
   }
 
   private getUserContactInformation(contactInformationId: number) {

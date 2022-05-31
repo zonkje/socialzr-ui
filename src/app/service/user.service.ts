@@ -12,8 +12,8 @@ export class UserService {
   usersChanged = new Subject<User[]>();
   private users: User[] = [];
 
-  userChanged = new Subject<User>();
-  private user: User = null;
+  currentUserChanged = new Subject<User>();
+  private currentUser: User = null;
 
   constructor(private http: HttpClient) {
   }
@@ -30,8 +30,13 @@ export class UserService {
   }
 
   getUser(index: number) {
-    return this.getUserById(index);
+    return this.findUserById(index);
   }
+
+  getUserById(index: number) {
+    return this.http.get<User>('http://localhost:8080/api/v1/user/' + index)
+  }
+
 
   getCurrentUser() {
     let currentUser: LoggedUserData = JSON.parse(localStorage.getItem('loggedUserData'));
@@ -39,8 +44,8 @@ export class UserService {
       .pipe(
         tap(
           user => {
-            this.user = user;
-            this.userChanged.next(this.user);
+            this.currentUser = user;
+            this.currentUserChanged.next(this.currentUser);
           }
         )
       )
@@ -50,7 +55,7 @@ export class UserService {
     return this.http.get<UserContactInformation>('http://localhost:8080/api/v1/contact_information/' + contactInformationId);
   }
 
-  private getUserById(userId: number): User {
+  private findUserById(userId: number): User {
     for (let user of this.users) {
       if (user.id === userId) {
         return user;

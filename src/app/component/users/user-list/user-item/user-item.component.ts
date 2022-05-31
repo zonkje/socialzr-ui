@@ -15,4 +15,6 @@ export class UserItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // TODO: -fix bug: item size not const
+
 }

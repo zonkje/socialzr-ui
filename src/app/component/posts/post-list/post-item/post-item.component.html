@@ -5,12 +5,12 @@
   class="list-group-item clearfix rcorners">
   <div class="media">
     <div class="media-left">
-      <img src="https://sociuu.com/wp-content/themes/Sociuu/assets/images/author-default.png" class="media-object"
+      <img src="{{user?.avatarUrl}}" class="media-object img-circle"
            style="width:90px">
     </div>
     <div class="media-body">
       <h6 class="media-heading">{{post.postLabels}}</h6>
-      <h4 class="media-heading">username</h4>
+      <h4 class="media-heading">{{user?.username}}</h4>
       <small><i>Posted {{post.createDate | dateAgo }}</i></small>
       <p>{{post.text | shorten: 40}}</p>
     </div>

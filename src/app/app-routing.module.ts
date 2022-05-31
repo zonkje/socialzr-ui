@@ -20,6 +20,8 @@ import {AuthGuard} from './guard/auth.guard';
 import {UserStartComponent} from './component/users/user-start/user-start.component';
 import {UserDetailComponent} from './component/users/user-detail/user-detail.component';
 import {UsersResolverService} from './service/users-resolver.service';
+import {CommentEditComponent} from './component/comments/comment-edit/comment-edit.component';
+import {PostDetailResolverService} from './service/post-detail-resolver.service';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'post', pathMatch: 'full'},
@@ -27,7 +29,11 @@ const appRoutes: Routes = [
     path: 'post', component: PostsComponent, canActivate: [AuthGuard], children: [
       {path: '', component: PostStartComponent},
       {path: 'new', component: PostEditComponent},
-      {path: ':id', component: PostDetailComponent, resolve: [PostsResolverService]},
+      {
+        path: ':id', component: PostDetailComponent, resolve: [PostsResolverService, PostDetailResolverService], children: [
+          {path: 'comment/new', component: CommentEditComponent}
+        ]
+      },
       {path: ':id/edit', component: PostEditComponent, resolve: [PostsResolverService]}
     ]
   },

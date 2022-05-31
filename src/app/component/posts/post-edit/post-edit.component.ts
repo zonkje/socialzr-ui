@@ -13,6 +13,7 @@ export class PostEditComponent implements OnInit {
   id: number;
   editMode = false;
   postForm: FormGroup;
+  currentUsername = '';
 
   constructor(private route: ActivatedRoute,
               private postService: PostService,
@@ -20,6 +21,7 @@ export class PostEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.currentUsername = JSON.parse(localStorage.getItem('loggedUserData'))['username'];
     this.route.params
       .subscribe(
         (params: Params) => {
@@ -51,6 +53,7 @@ export class PostEditComponent implements OnInit {
     this.onCancel();
   }
 
+  // TODO: -fix bug: after navigate back to previous page changes do not appear on the Post Detail component
   onCancel() {
     this.router.navigate(['../'], {relativeTo: this.route});
   }

@@ -3,9 +3,12 @@ import {Subject} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {tap} from 'rxjs/operators';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class PostService {
+
+  entityName: string = 'post';
 
   postsChanged = new Subject<Post[]>();
   private posts: Post[] = [];
@@ -14,7 +17,7 @@ export class PostService {
   }
 
   getPosts() {
-    return this.http.get<Post[]>('http://localhost:8080/api/v1/post')
+    return this.http.get<Post[]>(environment.apiURL + this.entityName)
       .pipe(
         tap(
           posts => {
@@ -24,12 +27,8 @@ export class PostService {
       );
   }
 
-  getPost(index: number) {
-    return this.getPostById(index);
-  }
-
   addPost(post: Post) {
-    this.http.post<Post>('http://localhost:8080/api/v1/post', post )
+    this.http.post<Post>(environment.apiURL + this.entityName, post)
       .subscribe(
         response => {
           this.getPosts().subscribe();
@@ -39,9 +38,11 @@ export class PostService {
   }
 
   updatePost(index: number, newPost: Post) {
-    this.http.patch<Post>('http://localhost:8080/api/v1/post/', newPost )
+    this.http.patch<Post>(environment.apiURL + this.entityName, newPost)
       .subscribe(
         response => {
+          console.log("UPDATED");
+          console.log(response);
           this.getPosts().subscribe();
           this.postsChanged.next(this.posts);
         }
@@ -49,7 +50,7 @@ export class PostService {
   }
 
   deletePost(index: number) {
-    this.http.delete('http://localhost:8080/api/v1/post/' + index )
+    this.http.delete(environment.apiURL + this.entityName + index)
       .subscribe(
         response => {
           this.getPosts().subscribe();
@@ -61,7 +62,11 @@ export class PostService {
       );
   }
 
-  private getPostById(postId: number): Post {
+  getPost(index: number) {
+    return this.findPostById(index);
+  }
+
+  private findPostById(postId: number): Post {
     for (let post of this.posts) {
       if (post.id === postId) {
         return post;
