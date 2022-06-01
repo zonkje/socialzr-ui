@@ -12,7 +12,8 @@ export class CommentsResolverService implements Resolve<PostComment[]> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
     Observable<PostComment[]> | Promise<PostComment[]> | PostComment[] {
-    return this.commentService.getCommentsByPost(route.params['id']);
+    let postId = +route.parent.paramMap.get('id');
+    return this.commentService.getCommentsByPost(postId);
   }
 
 }

@@ -26,14 +26,12 @@ export class PostDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("DETAILS_ON_INIT");
     this.loggedUserId = JSON.parse(localStorage.getItem('loggedUserData'))['id'];
     this.route.params
       .subscribe(
         (params: Params) => {
           this.id = +params['id'];
           this.post = this.postService.getPost(this.id);
-          console.log(this.post);
         }
       );
     this.userService.getUserById(this.post.authorId)

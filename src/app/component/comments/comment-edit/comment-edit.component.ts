@@ -56,7 +56,8 @@ export class CommentEditComponent implements OnInit {
   }
 
   onCancel() {
-    this.router.navigate(['/', 'post', this.postId]);
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
+      this.router.navigate(['/', 'post', this.postId]));
   }
 
 }

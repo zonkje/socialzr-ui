@@ -21,7 +21,6 @@ import {UserStartComponent} from './component/users/user-start/user-start.compon
 import {UserDetailComponent} from './component/users/user-detail/user-detail.component';
 import {UsersResolverService} from './service/users-resolver.service';
 import {CommentEditComponent} from './component/comments/comment-edit/comment-edit.component';
-import {PostDetailResolverService} from './service/post-detail-resolver.service';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'post', pathMatch: 'full'},
@@ -30,8 +29,9 @@ const appRoutes: Routes = [
       {path: '', component: PostStartComponent},
       {path: 'new', component: PostEditComponent},
       {
-        path: ':id', component: PostDetailComponent, resolve: [PostsResolverService, PostDetailResolverService], children: [
-          {path: 'comment/new', component: CommentEditComponent}
+        path: ':id', component: PostDetailComponent, resolve: [PostsResolverService], children: [
+          {path: 'comment/new', component: CommentEditComponent},
+          {path: 'comment/:cid/edit', component: CommentEditComponent}
         ]
       },
       {path: ':id/edit', component: PostEditComponent, resolve: [PostsResolverService]}
