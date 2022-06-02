@@ -46,6 +46,24 @@ export class PostDetailComponent implements OnInit {
     this.router.navigate(['edit'], {relativeTo: this.route});
   }
 
+  onThumbUp() {
+    this.postService.addPostThumbUp(this.post.id)
+      .subscribe(response => {
+
+        },
+        error => {
+          const errorMsg = error.error.messages;
+          const expectedErrorMsg = 'User with ID: ' + this.loggedUserId +
+            ' has already given a thumb up to widget with ID: ' + this.post.id;
+          if (errorMsg.length == 1 && errorMsg[0] == expectedErrorMsg) {
+            this.postService.deletePostThumbUp(this.post.id);
+          }
+        });
+
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
+      this.router.navigate(['/', 'post', this.post.id]));
+  }
+
   onDeletePost() {
     this.postService.deletePost(this.id);
     this.router.navigate(['/post']);

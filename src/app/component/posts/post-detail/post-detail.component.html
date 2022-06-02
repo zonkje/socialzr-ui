@@ -28,7 +28,7 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-xs-12" style="display: flex ;justify-content: center">
     <div class="pull-right">
       <div class="media">
         <div class="media-right">
@@ -49,8 +49,16 @@
     <div class="card" style="margin-bottom: 5px">
       <h3 style="margin-bottom: 30px">{{post.text}}</h3>
       <h6>Created: {{post.createDate | date:'longDate' }} </h6>
-      <button type="button" class="btn btn-default btn-lg">
-        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> {{post.postThumbUpCount}}
+      <button
+        type="button"
+        class="btn btn-default btn-lg"
+        (click)="onThumbUp()"
+      >
+        <span
+          class="glyphicon glyphicon-thumbs-up"
+          aria-hidden="true"
+          style="font-size: 25px"
+        ></span><span style="font-size: 30px"> {{post.postThumbUpCount}}</span>
       </button>
     </div>
   </div>

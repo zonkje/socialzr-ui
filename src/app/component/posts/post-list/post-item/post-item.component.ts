@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Post} from '../../../../model/post.model';
 import {User} from '../../../../model/user.model';
 import {UserService} from '../../../../service/user.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-post-item',
@@ -13,7 +14,9 @@ export class PostItemComponent implements OnInit {
   @Input() index: number;
   user: User;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService,
+              private route: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -27,6 +30,11 @@ export class PostItemComponent implements OnInit {
           this.user = user;
         }
       );
+  }
+
+  onSelectPost() {
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
+      this.router.navigate([this.index], {relativeTo: this.route}));
   }
 
 }

@@ -62,6 +62,15 @@ export class PostService {
       );
   }
 
+  addPostThumbUp(postId: number) {
+    return this.http.post(environment.apiURL + this.entityName + '/thumb_up', {postId: postId});
+  }
+
+  deletePostThumbUp(postId: number) {
+    this.http.delete(environment.apiURL + this.entityName + '/thumb_up/' +postId)
+      .subscribe();
+  }
+
   getPost(index: number) {
     return this.findPostById(index);
   }

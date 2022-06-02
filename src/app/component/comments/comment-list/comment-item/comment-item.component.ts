@@ -1,7 +1,6 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {PostComment} from '../../../../model/post-comment.model';
 import {UserService} from '../../../../service/user.service';
-import {Subscription} from 'rxjs';
 import {User} from '../../../../model/user.model';
 import {CommentService} from '../../../../service/comment.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -16,6 +15,7 @@ export class CommentItemComponent implements OnInit, OnDestroy {
   @Input() comment: PostComment;
   user: User;
   authFlag = false;
+  loggedUserId: number;
 
   constructor(private userService: UserService,
               private commentService: CommentService,
@@ -28,22 +28,42 @@ export class CommentItemComponent implements OnInit, OnDestroy {
   }
 
   private getUser(): void {
-    let loggedUserId: number = JSON.parse(localStorage.getItem('loggedUserData'))['id'];
+    this.loggedUserId = JSON.parse(localStorage.getItem('loggedUserData'))['id'];
     this.userService.getUserById(this.comment.authorId)
       .subscribe(
         (user: User) => {
           this.user = user;
-          this.authFlag = this.user.id == loggedUserId;
+          this.authFlag = this.user.id == this.loggedUserId;
         }
       );
   }
 
+  // TODO: -add this functionality
   onEditComment() {
-    this.router.navigate(['comment/' + this.comment.id + '/edit'], {relativeTo: this.route});
+    // this.router.navigate(['comment/' + this.comment.id + '/edit'], {relativeTo: this.route});
   }
 
   onDeleteComment() {
     this.commentService.deleteComment(this.comment.id, this.comment.postId);
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
+      this.router.navigate(['/', 'post', this.comment.postId]));
+  }
+
+
+  onThumbUp() {
+    this.commentService.addCommentThumbUp(this.comment.id)
+      .subscribe(response => {
+
+        },
+        error => {
+          const errorMsg = error.error.messages;
+          const expectedErrorMsg = 'User with ID: ' + this.loggedUserId +
+            ' has already given a thumb up to widget with ID: ' + this.comment.id;
+          if (errorMsg.length == 1 && errorMsg[0] == expectedErrorMsg) {
+            this.commentService.deleteCommentThumbUp(this.comment.id);
+          }
+        });
+
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
       this.router.navigate(['/', 'post', this.comment.postId]));
   }

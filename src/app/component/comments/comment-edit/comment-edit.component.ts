@@ -1,4 +1,4 @@
-import {Component, NgZone, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CommentService} from '../../../service/comment.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {ViewportScroller} from '@angular/common';
@@ -14,23 +14,25 @@ export class CommentEditComponent implements OnInit {
 
   commentForm: FormGroup;
   postId: number;
+  editMode = false; // tu
+  comment: PostComment;
 
   constructor(private commentService: CommentService,
               private scroller: ViewportScroller,
               private route: ActivatedRoute,
-              private router: Router,
-              private zone: NgZone,) {
+              private router: Router) {
   }
 
   ngOnInit(): void {
-    this.initForm();
     this.route.parent.paramMap
       .subscribe(
         (params: Params) => {
           this.postId = params.get('id');
         }
       );
+
     this.scroller.scrollToAnchor('targetNewComment');
+    this.initForm();
   }
 
   onSubmit() {
@@ -48,7 +50,12 @@ export class CommentEditComponent implements OnInit {
   }
 
   private initForm() {
+    console.log(this.editMode);
     let commentText = '';
+
+    if (this.editMode) {
+      commentText = this.comment.text;
+    }
 
     this.commentForm = new FormGroup({
       'text': new FormControl(commentText, Validators.required)

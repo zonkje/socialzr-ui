@@ -1,6 +1,6 @@
 <a
   style="cursor: pointer; margin: 8px"
-  [routerLink]="[index]"
+  (click)="onSelectPost()"
   routerLinkActive="active-post"
   class="list-group-item clearfix rcorners">
   <div class="media">
@@ -15,8 +15,12 @@
       <p>{{post.text | shorten: 40}}</p>
     </div>
     <div class="media-right">
-      <div class="well">
-        Thumb Up's {{post.postThumbUpCount}}
+      <div style="padding-top: 60px; display: inline-flex">
+        <i
+          class="glyphicon glyphicon-thumbs-up"
+          aria-hidden="true"
+          style="font-size: 15px; padding-right: 0.5rem;"
+        ></i><span> {{post.postThumbUpCount}}</span>
       </div>
     </div>
   </div>

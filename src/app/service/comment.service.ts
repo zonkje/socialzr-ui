@@ -1,9 +1,10 @@
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable, Output} from '@angular/core';
 import {Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {tap} from 'rxjs/operators';
 import {PostComment} from '../model/post-comment.model';
 import {environment} from '../../environments/environment';
+import {error} from 'protractor';
 
 @Injectable()
 export class CommentService {
@@ -48,6 +49,15 @@ export class CommentService {
           alert(error.error.messages);
         }
       );
+  }
+
+  addCommentThumbUp(commentId: number) {
+    return this.http.post(environment.apiURL + this.entityName + '/thumb_up', {commentId: commentId});
+  }
+
+  deleteCommentThumbUp(commentId: number) {
+    this.http.delete(environment.apiURL + this.entityName + '/thumb_up/' +commentId)
+      .subscribe();
   }
 
 }

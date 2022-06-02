@@ -7,3 +7,8 @@
   border-color: indianred;
   background-color: #F9EAEA;
 }
+.vcenter {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+}

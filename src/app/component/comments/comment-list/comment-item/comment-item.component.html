@@ -11,7 +11,12 @@
       <p>{{comment.text}}</p>
     </div>
     <div class="media-right">
-      Thumb Up's {{comment.commentThumbUpCount}}
+      <button type="button" class="btn btn-default" (click)="onThumbUp()">
+        <span
+          class="glyphicon glyphicon-thumbs-up"
+          aria-hidden="true"
+        ></span><span> {{comment.commentThumbUpCount}}</span>
+      </button>
     </div>
   </div>
   <div class="pull-right" *ngIf="authFlag">
