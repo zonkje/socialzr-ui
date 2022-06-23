@@ -52,8 +52,7 @@ export class CommentItemComponent implements OnInit, OnDestroy {
 
   onThumbUp() {
     this.commentService.addCommentThumbUp(this.comment.id)
-      .subscribe(response => {
-
+      .subscribe(() => {
         },
         error => {
           const errorMsg = error.error.messages;

@@ -3,6 +3,7 @@ import {User} from '../../model/user.model';
 import {UserService} from '../../service/user.service';
 import {UserContactInformation} from '../../model/user-contact-information.model';
 import {Subscription} from 'rxjs';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +16,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   userContactInformation: UserContactInformation;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService,
+              private route: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -41,6 +44,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
           this.userContactInformation = contactInfo;
         }
       );
+  }
+
+  onEdit() {
+    this.router.navigate(['edit'], {relativeTo: this.route});
   }
 
   ngOnDestroy(): void {

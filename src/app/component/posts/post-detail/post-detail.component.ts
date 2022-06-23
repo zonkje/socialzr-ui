@@ -31,15 +31,20 @@ export class PostDetailComponent implements OnInit {
       .subscribe(
         (params: Params) => {
           this.id = +params['id'];
-          this.post = this.postService.getPost(this.id);
+          this.postService.getPostById(this.id)
+            .subscribe((post: Post) => {
+              this.post = post;
+              this.userService.getUserById(this.post.authorId)
+                .subscribe(
+                  (user: User) => {
+                    this.user = user;
+                  }
+                );
+            });
+
         }
       );
-    this.userService.getUserById(this.post.authorId)
-      .subscribe(
-        (user: User) => {
-          this.user = user;
-        }
-      );
+
   }
 
   onEditPost() {
@@ -48,14 +53,17 @@ export class PostDetailComponent implements OnInit {
 
   onThumbUp() {
     this.postService.addPostThumbUp(this.post.id)
-      .subscribe(response => {
-
+      .subscribe(() => {
+          console.log("DODAJE");
         },
         error => {
+          console.log("USUWAM");
           const errorMsg = error.error.messages;
+          console.log(errorMsg[0]);
           const expectedErrorMsg = 'User with ID: ' + this.loggedUserId +
             ' has already given a thumb up to widget with ID: ' + this.post.id;
           if (errorMsg.length == 1 && errorMsg[0] == expectedErrorMsg) {
+            console.log("MSG SIE ZGADZA");
             this.postService.deletePostThumbUp(this.post.id);
           }
         });

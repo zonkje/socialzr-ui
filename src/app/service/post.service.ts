@@ -13,6 +13,9 @@ export class PostService {
   postsChanged = new Subject<Post[]>();
   private posts: Post[] = [];
 
+  postChanged = new Subject<Post>();
+  private post: Post;
+
   constructor(private http: HttpClient) {
   }
 
@@ -25,6 +28,10 @@ export class PostService {
             this.postsChanged.next(this.posts);
           })
       );
+  }
+
+  getPostById(index: number) {
+    return this.http.get<Post>(environment.apiURL + this.entityName + '/' + index);
   }
 
   addPost(post: Post) {
@@ -41,8 +48,6 @@ export class PostService {
     this.http.patch<Post>(environment.apiURL + this.entityName, newPost)
       .subscribe(
         response => {
-          console.log("UPDATED");
-          console.log(response);
           this.getPosts().subscribe();
           this.postsChanged.next(this.posts);
         }

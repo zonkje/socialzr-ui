@@ -6,7 +6,7 @@
       <button
         type="button"
         class="btn btn-primary dropdown-toggle"
-        [class.disabled]="post.authorId != loggedUserId"
+        [class.disabled]="post?.authorId != loggedUserId"
       >
         Manage Post<span class="caret" style="margin-left: 3px"></span>
       </button>
@@ -21,7 +21,7 @@
 <div class="row">
   <div class="col-xs-12">
     <ul class=" list-unstyled" style="display: flex;">
-      <li *ngFor="let label of post.postLabels" style="width: 100%; padding: 5px; ">
+      <li *ngFor="let label of post?.postLabels" style="width: 100%; padding: 5px; ">
         <span id="post-label" class="label label-info">{{label}}</span>
       </li>
     </ul>
@@ -47,8 +47,8 @@
 <div class="row">
   <div class="col-xs-12">
     <div class="card" style="margin-bottom: 5px">
-      <h3 style="margin-bottom: 30px">{{post.text}}</h3>
-      <h6>Created: {{post.createDate | date:'longDate' }} </h6>
+      <h3 style="margin-bottom: 30px">{{post?.text}}</h3>
+      <h6>Created: {{post?.createDate | date:'longDate' }} </h6>
       <button
         type="button"
         class="btn btn-default btn-lg"
@@ -58,7 +58,7 @@
           class="glyphicon glyphicon-thumbs-up"
           aria-hidden="true"
           style="font-size: 25px"
-        ></span><span style="font-size: 30px"> {{post.postThumbUpCount}}</span>
+        ></span><span style="font-size: 30px"> {{post?.postThumbUpCount}}</span>
       </button>
     </div>
   </div>

@@ -9,10 +9,15 @@
            style="width:90px">
     </div>
     <div class="media-body">
-      <h6 class="media-heading">{{post.postLabels}}</h6>
+      <div
+        *ngFor="let label of post.postLabels"
+        style="display: inline-flex; color: indianred; font-weight: bold; padding-right: 0.7rem; font-size: 10px">
+        <i class="media-heading"
+        >{{label}}</i>
+      </div>
       <h4 class="media-heading">{{user?.username}}</h4>
       <small><i>Posted {{post.createDate | dateAgo }}</i></small>
-      <p>{{post.text | shorten: 40}}</p>
+      <p style="font-size: 16px; margin-top: 8px">{{post.text | shorten: 40}}</p>
     </div>
     <div class="media-right">
       <div style="padding-top: 60px; display: inline-flex">

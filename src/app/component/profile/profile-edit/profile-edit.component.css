@@ -1,0 +1,10 @@
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+.center {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}

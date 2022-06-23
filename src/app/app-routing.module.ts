@@ -21,6 +21,7 @@ import {UserStartComponent} from './component/users/user-start/user-start.compon
 import {UserDetailComponent} from './component/users/user-detail/user-detail.component';
 import {UsersResolverService} from './service/users-resolver.service';
 import {CommentEditComponent} from './component/comments/comment-edit/comment-edit.component';
+import {ProfileEditComponent} from './component/profile/profile-edit/profile-edit.component';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'post', pathMatch: 'full'},
@@ -51,7 +52,11 @@ const appRoutes: Routes = [
       {path: ':id', component: UserDetailComponent, resolve: [UsersResolverService]}
     ]
   },
-  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  {
+    path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], children: [
+      {path: 'edit', component: ProfileEditComponent}
+    ]
+  },
   {path: 'report', component: ReportComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},

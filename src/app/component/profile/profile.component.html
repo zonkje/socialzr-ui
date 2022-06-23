@@ -9,7 +9,7 @@
             <h3>{{user?.username}}</h3>
             <p class="text-secondary mb-1">Member since:</p>
             <p class="text-muted font-size-sm">{{user?.createDate | date: 'mediumDate' }}</p>
-            <button class="btn btn-primary">Edit profile</button>
+            <button class="btn btn-primary" (click)="onEdit()">Edit profile</button>
           </div>
         </div>
       </div>
@@ -73,9 +73,6 @@
         </div>
       </div>
     </div>
-
   </div>
-
 </div>
-
-<p class="text-muted"><small># add user recent post, add user recent comment, add user groups #</small></p>
+<router-outlet></router-outlet>

@@ -53,7 +53,6 @@ export class PostEditComponent implements OnInit {
     this.onCancel();
   }
 
-  // TODO: -fix bug: after navigate back to previous page changes do not appear on the Post Detail component
   onCancel() {
     this.router.navigate(['../'], {relativeTo: this.route});
   }
