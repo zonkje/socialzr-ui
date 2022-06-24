@@ -57,7 +57,7 @@ const appRoutes: Routes = [
       {path: 'edit', component: ProfileEditComponent}
     ]
   },
-  {path: 'report', component: ReportComponent, canActivate: [AuthGuard]},
+  {path: 'report/:id', component: ReportComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: '**', redirectTo: 'post'}

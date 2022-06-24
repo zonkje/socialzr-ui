@@ -40,7 +40,7 @@ export class CommentItemComponent implements OnInit, OnDestroy {
 
   // TODO: -add this functionality
   onEditComment() {
-    // this.router.navigate(['comment/' + this.comment.id + '/edit'], {relativeTo: this.route});
+    this.router.navigate(['comment/' + this.comment.id + '/edit'], {relativeTo: this.route});
   }
 
   onDeleteComment() {

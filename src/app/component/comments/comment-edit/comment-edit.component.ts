@@ -14,7 +14,7 @@ export class CommentEditComponent implements OnInit {
 
   commentForm: FormGroup;
   postId: number;
-  editMode = false; // tu
+  editMode = false;
   comment: PostComment;
 
   constructor(private commentService: CommentService,
@@ -24,6 +24,7 @@ export class CommentEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initForm();
     this.route.parent.paramMap
       .subscribe(
         (params: Params) => {
@@ -31,34 +32,46 @@ export class CommentEditComponent implements OnInit {
         }
       );
 
+    this.route.params.subscribe(
+      params => {
+        if (typeof params['cid'] !== 'undefined') {
+          this.editMode = true;
+          this.commentService.getCommentById(params['cid'])
+            .subscribe(
+              (comment: PostComment) => {
+                this.comment = comment;
+                this.commentForm.patchValue({
+                  text: this.comment.text
+                });
+              }
+            );
+        }
+      }
+    );
     this.scroller.scrollToAnchor('targetNewComment');
-    this.initForm();
   }
 
   onSubmit() {
     const newComment = new PostComment(
-      null,
+      this.editMode ? this.comment.id : null,
       null,
       null,
       this.commentForm.value['text'],
-      null,
+      this.editMode ? this.comment.authorId : null,
       this.postId,
       null
     );
-    this.commentService.addComment(newComment);
+    if (this.editMode) {
+      this.commentService.updateComment(newComment);
+    } else {
+      this.commentService.addComment(newComment);
+    }
     this.onCancel();
   }
 
   private initForm() {
-    console.log(this.editMode);
-    let commentText = '';
-
-    if (this.editMode) {
-      commentText = this.comment.text;
-    }
-
     this.commentForm = new FormGroup({
-      'text': new FormControl(commentText, Validators.required)
+      'text': new FormControl('', Validators.required)
     });
   }
 

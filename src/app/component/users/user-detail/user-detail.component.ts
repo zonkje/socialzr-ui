@@ -12,6 +12,7 @@ import {UserContactInformation} from '../../../model/user-contact-information.mo
 export class UserDetailComponent implements OnInit {
   user: User;
   id: number;
+  isLoggedUser = false;
   userContactInformation: UserContactInformation;
 
   constructor(private userService: UserService,
@@ -20,7 +21,8 @@ export class UserDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const id = this.route.params
+    let loggedUserId = JSON.parse(localStorage.getItem('loggedUserData'))['id'];
+    this.route.params
       .subscribe(
         (params: Params) => {
           this.id = +params['id'];
@@ -35,9 +37,13 @@ export class UserDetailComponent implements OnInit {
                 );
             }
           );
-
         }
       );
+    this.isLoggedUser = this.id == loggedUserId;
+  }
+
+  onReport() {
+    this.router.navigate(['report', this.id])
   }
 
 }

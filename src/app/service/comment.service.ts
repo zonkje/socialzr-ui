@@ -5,6 +5,7 @@ import {tap} from 'rxjs/operators';
 import {PostComment} from '../model/post-comment.model';
 import {environment} from '../../environments/environment';
 import {error} from 'protractor';
+import {Post} from '../model/post.model';
 
 @Injectable()
 export class CommentService {
@@ -28,11 +29,25 @@ export class CommentService {
       );
   }
 
+  getCommentById(index: number) {
+    return this.http.get<PostComment>(environment.apiURL + this.entityName + '/' + index);
+  }
+
   addComment(comment: PostComment) {
     this.http.post<PostComment>('http://localhost:8080/api/v1/comment', comment)
       .subscribe(
         response => {
           this.getCommentsByPost(response.postId).subscribe();
+          this.commentsChanged.next(this.comments);
+        }
+      );
+  }
+
+  updateComment(newComment: PostComment) {
+    this.http.patch<PostComment>(environment.apiURL + this.entityName, newComment)
+      .subscribe(
+        response => {
+          this.getCommentsByPost(newComment.postId).subscribe();
           this.commentsChanged.next(this.comments);
         }
       );

@@ -1,7 +1,25 @@
-<div class="row">
-  <h1>Report form:</h1>
-  <p class="text-info">describe the violation of the rules you observed</p>
-  <form action="">
-    <input type="text">
-  </form>
+<div class="row center">
+  <div class="col-xs-12">
+    <h4 style="text-align: justify">If you have noticed that this user has violated the rules of using the social
+      networking site (e.g. posting vulgar or obscene content, spreading disinformation or hatred, offending other
+      users, inciting violence or self-harm, posting advertising content), please inform us using the form below.</h4>
+    <form [formGroup]="reportForm" (ngSubmit)="onSubmit()">
+      <div>
+        <div class="form-group">
+          <label for="text">Violation report</label>
+          <textarea
+            type="text"
+            id="text"
+            class="form-control"
+            formControlName="text"
+            placeholder="Description of the report"
+            rows="4"></textarea>
+        </div>
+      </div>
+      <div>
+        <button type="submit" class="btn btn-success" [disabled]="!reportForm.valid">Send</button> |
+        <button type="submit" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+      </div>
+    </form>
+  </div>
 </div>

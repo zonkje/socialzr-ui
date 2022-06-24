@@ -40,6 +40,7 @@ import {CommentEditComponent} from './component/comments/comment-edit/comment-ed
 import {TimeAgoPipe} from './pipe/time-ago.pipe';
 import {UserStartComponent} from './component/users/user-start/user-start.component';
 import {ProfileEditComponent} from './component/profile/profile-edit/profile-edit.component';
+import {ReportService} from './service/report.service';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,7 @@ import {ProfileEditComponent} from './component/profile/profile-edit/profile-edi
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [PostService, GroupService, UserService, CommentService,
+  providers: [PostService, GroupService, UserService, CommentService, ReportService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
   ],
   bootstrap: [AppComponent]

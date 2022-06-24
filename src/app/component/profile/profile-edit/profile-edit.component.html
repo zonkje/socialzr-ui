@@ -1,5 +1,5 @@
 <hr>
-<div class="row center">
+<div class="row center" id="targetEditForm">
   <div class="col-xs-12">
     <form [formGroup]="editProfileForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
@@ -37,6 +37,21 @@
           class="form-control"
           formControlName="phoneNumber"
         >
+      </div>
+      <div class="form-group">
+        <label for="avatarUrl">Avatar URL</label>
+        <input
+          type="text"
+          id="avatarUrl"
+          class="form-control"
+          formControlName="avatarUrl"
+          #avatarUrl
+        >
+      </div>
+      <div class="row" >
+        <div class="col-xs-7">
+          <img [src]="avatarUrl.value" class="img-responsive" style="margin-bottom: 15px">
+        </div>
       </div>
       <div class="form-group">
         <label for="address">Address</label>
@@ -83,8 +98,27 @@
           formControlName="country"
         >
       </div>
+      <label style="margin-bottom: 10px">Websites</label>
+      {{' '}}
+      <button type="button" class="btn btn-default btn-xs" (click)="addWebsiteURL()">+</button>
+      <div formArrayName="websitesURLs"
+           *ngFor="let url of editProfileForm.get('websitesURLs')['controls']; let i = index;">
+        <div [formGroupName]="i" class="form-group">
+          <div style="display: flex">
+            <input
+              type="text"
+              formControlName="websiteURL"
+              class="form-control"
+              style="margin-right: 9px"
+            >{{' '}}
+            <button type="button" class="btn btn-danger" (click)="removeWebsiteURL(i)"><strong>-</strong></button>
+          </div>
+        </div>
+      </div>
+
       <div>
-        <button type="submit" class="btn btn-success" [disabled]="!editProfileForm.valid">Save</button> |
+        <button type="submit" class="btn btn-success" [disabled]="!editProfileForm.valid">Save</button>
+        |
         <button type="submit" class="btn btn-danger" (click)="onCancel()">Cancel</button>
       </div>
     </form>

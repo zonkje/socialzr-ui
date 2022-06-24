@@ -66,8 +66,10 @@
             </div>
           </div>
         </div>
+        <div class="pull-right" *ngIf="!isLoggedUser">
+          <button type="submit" class="btn btn-xs btn-warning" (click)="onReport()">Report</button>
+        </div>
       </div>
     </div>
   </div>
 </div>
-<p class="text-muted"><small># add user recent post, add user recent comment, add user groups #</small></p>
