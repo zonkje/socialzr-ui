@@ -45,7 +45,7 @@ export class PostService {
   }
 
   updatePost(index: number, newPost: Post) {
-    this.http.patch<Post>(environment.apiURL + this.entityName, newPost)
+    this.http.put<Post>(environment.apiURL + this.entityName, newPost)
       .subscribe(
         response => {
           this.getPosts().subscribe();
@@ -55,14 +55,14 @@ export class PostService {
   }
 
   deletePost(index: number) {
-    this.http.delete(environment.apiURL + this.entityName + index)
+    this.http.delete(environment.apiURL + this.entityName + '/' + index)
       .subscribe(
         response => {
           this.getPosts().subscribe();
           this.postsChanged.next(this.posts);
         },
         error => {
-          alert(error.error.messages);
+          console.log(error);
         }
       );
   }

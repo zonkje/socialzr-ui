@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="group.creatorId == loggedUserId">
   <div class="col-xs-12">
     <div
       class="btn-group"
@@ -6,7 +6,6 @@
       <button
         type="button"
         class="btn btn-primary dropdown-toggle"
-        [class.disabled]= "group.creatorId != loggedUserId"
       >
         Manage Group<span class="caret" style="margin-left: 3px"></span>
       </button>
@@ -15,17 +14,14 @@
         <li><a style="cursor: pointer;" (click)="onDeletePost()">Delete Group (admin only)</a></li>
       </ul>
     </div>
+    <hr>
   </div>
 </div>
-<hr>
 <div class="row">
   <div class="col-xs-8">
     <div class="row">
-      <div class="col-xs-8 pull-right">
-        <ul class="list-inline">
-          <li class="list-inline-item"><p style="font-size: 50px"><strong>{{group.name}}</strong></p></li>
-          <li class="list-inline-item"><small class="text-muted"> GROUP ID: {{group.id}}</small></li>
-        </ul>
+      <div class="col-xs-8">
+        <p style="font-size: 30px"><strong>{{group.name}}</strong></p>
       </div>
     </div>
     <div class="card mb-3">
@@ -71,7 +67,7 @@
             <h5 class="mb-0"><strong>Creator</strong></h5>
           </div>
           <div class="col-sm-9 text-secondary">
-            {{ group.creatorId }} # creator username here #
+            {{ creatorUsername }}
           </div>
         </div>
       </div>
@@ -87,5 +83,3 @@
     </div>
   </div>
 </div>
-
-<p class="text-muted"><small># add group posts, add group members #</small></p>

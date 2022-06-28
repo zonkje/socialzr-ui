@@ -20,10 +20,11 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     let imgUrlRegex = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
+    let passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z])(?=.*[#?!@$%=^&*-])(?=\S+$).{8,}$/;
 
     this.signUpForm = new FormGroup({
-      'username': new FormControl(null, Validators.required),
-      'password': new FormControl(null, Validators.required),
+      'username': new FormControl(null, [Validators.required, Validators.minLength(2)]),
+      'password': new FormControl(null, [Validators.required, Validators.pattern(passwordRegex)]),
       'firstName': new FormControl(null, Validators.required),
       'lastName': new FormControl(null, Validators.required),
       'avatarUrl': new FormControl(null, Validators.pattern(imgUrlRegex || null)),

@@ -10,6 +10,10 @@
           class="form-control"
           formControlName="firstName"
         >
+        <span
+          *ngIf="!editProfileForm.get('firstName').valid && editProfileForm.get('firstName').touched"
+          class="help-block"
+        >First name is required.</span>
       </div>
       <div class="form-group">
         <label for="lastName">Last Name</label>
@@ -19,6 +23,10 @@
           class="form-control"
           formControlName="lastName"
         >
+        <span
+          *ngIf="!editProfileForm.get('firstName').valid && editProfileForm.get('firstName').touched"
+          class="help-block"
+        >Last name is required.</span>
       </div>
       <div class="form-group">
         <label for="email">Email</label>
@@ -27,7 +35,12 @@
           id="email"
           class="form-control"
           formControlName="email"
+          placeholder="e.g. example@mail.com"
         >
+        <span
+          *ngIf="!editProfileForm.get('email').valid && editProfileForm.get('email').touched"
+          class="help-block"
+        >A valid email address consists of an email prefix and an email domain, separated by '@'.</span>
       </div>
       <div class="form-group">
         <label for="phoneNumber">Phone number</label>
@@ -36,7 +49,12 @@
           id="phoneNumber"
           class="form-control"
           formControlName="phoneNumber"
+          placeholder="e.g. 123-456-789"
         >
+        <span
+          *ngIf="!editProfileForm.get('phoneNumber').valid && editProfileForm.get('phoneNumber').touched"
+          class="help-block"
+        >The phone number must match the patterns: xxxxxxxxx or xxx-xxx-xxx.</span>
       </div>
       <div class="form-group">
         <label for="avatarUrl">Avatar URL</label>
@@ -61,6 +79,10 @@
           class="form-control"
           formControlName="address"
         >
+        <span
+          *ngIf="!editProfileForm.get('address').valid && editProfileForm.get('address').touched"
+          class="help-block"
+        >Address is required.</span>
       </div>
       <div class="form-group">
         <label for="city">City</label>
@@ -70,6 +92,10 @@
           class="form-control"
           formControlName="city"
         >
+        <span
+          *ngIf="!editProfileForm.get('city').valid && editProfileForm.get('city').touched"
+          class="help-block"
+        >City name should be at least 2 characters long.</span>
       </div>
       <div class="form-group">
         <label for="zipCode">Zip code</label>
@@ -79,6 +105,10 @@
           class="form-control"
           formControlName="zipCode"
         >
+        <span
+          *ngIf="!editProfileForm.get('zipCode').valid && editProfileForm.get('zipCode').touched"
+          class="help-block"
+        >Zip code is required.</span>
       </div>
       <div class="form-group">
         <label for="state">State</label>
@@ -88,6 +118,10 @@
           class="form-control"
           formControlName="state"
         >
+        <span
+          *ngIf="!editProfileForm.get('state').valid && editProfileForm.get('state').touched"
+          class="help-block"
+        >State name should be at least 2 characters long.</span>
       </div>
       <div class="form-group">
         <label for="country">Country</label>
@@ -97,6 +131,10 @@
           class="form-control"
           formControlName="country"
         >
+        <span
+          *ngIf="!editProfileForm.get('country').valid && editProfileForm.get('country').touched"
+          class="help-block"
+        >Country name should be at least 2 characters long.</span>
       </div>
       <label style="margin-bottom: 10px">Websites</label>
       {{' '}}

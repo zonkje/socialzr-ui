@@ -51,9 +51,11 @@
             <h5 class="mb-0"><strong>Address</strong></h5>
           </div>
           <div class="col-sm-9 text-secondary">
-            {{ userContactInformation?.address?.address }}, {{ userContactInformation?.address?.zipCode }}
-            {{ userContactInformation?.address?.city }} ({{ userContactInformation?.address?.state }}),
-            {{ userContactInformation?.address?.country }}
+            {{ userContactInformation?.address?.address }}{{ userContactInformation?.address?.zipCode ?
+            ', ' + userContactInformation?.address?.zipCode : ''}}
+            {{ userContactInformation?.address?.city }} {{ userContactInformation?.address?.state ?
+            '(' + userContactInformation?.address?.state + ')' : ''}}{{ userContactInformation?.address?.country ? ', '
+            + userContactInformation?.address?.country : ''}}
           </div>
         </div>
         <hr>

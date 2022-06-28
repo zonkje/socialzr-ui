@@ -30,18 +30,22 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
+    let phoneNumberRegex = /\d{9}|(?:\d{3}-){2}\d{3}/;
+    let imgUrlRegex = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
+
     this.scroller.scrollToAnchor('targetEditForm');
     this.editProfileForm = this.fb.group({
       'firstName': new FormControl('', Validators.required),
       'lastName': new FormControl('', Validators.required),
-      'email': new FormControl('', Validators.required),
-      'phoneNumber': new FormControl('', Validators.required),
-      'avatarUrl': new FormControl('', Validators.required),
+      'email': new FormControl('', [Validators.required, Validators.email]),
+      'phoneNumber': new FormControl('', [Validators.required, Validators.pattern(phoneNumberRegex)]),
+      'avatarUrl': new FormControl('', Validators.pattern(imgUrlRegex)),
       'address': new FormControl('', Validators.required),
-      'city': new FormControl('', Validators.required),
+      'city': new FormControl('', [Validators.required, Validators.minLength(2)]),
       'zipCode': new FormControl('', Validators.required),
-      'state': new FormControl('', Validators.required),
-      'country': new FormControl('', Validators.required),
+      'state': new FormControl('', [Validators.required, Validators.minLength(2)]),
+      'country': new FormControl('', [Validators.required, Validators.minLength(2)]),
       'websitesURLs': this.fb.array([])
     });
     this.getUser();
@@ -98,8 +102,8 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       newUserWebsites = null;
     }
 
-    let updatedUserContactInformation = new UserContactInformation(
-      this.userContactInformation.id,
+    let userContactInformation = new UserContactInformation(
+      this.userContactInformation?.id,
       null,
       null,
       this.editProfileForm.value['email'],
@@ -108,7 +112,8 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       updatedUserAddress
     );
     this.userService.updateUser(updatedUser);
-    this.userService.updateUserContactInformation(updatedUserContactInformation);
+    this.userContactInformation ? this.userService.updateUserContactInformation(userContactInformation) :
+      this.userService.addUserContactInformation(userContactInformation);
     this.onCancel();
   }
 
@@ -116,27 +121,32 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     this.router.navigate(['../'], {relativeTo: this.route});
   }
 
-  private initFormValues(user: User, contactInformation: UserContactInformation) {
+  private initFormValues(user?: User, contactInformation?: UserContactInformation) {
 
-    this.editProfileForm.patchValue({
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: contactInformation.email,
-      phoneNumber: contactInformation.phoneNumber,
-      avatarUrl: user.avatarUrl,
-      address: contactInformation.address.address,
-      city: contactInformation.address.city,
-      zipCode: contactInformation.address.zipCode,
-      state: contactInformation.address.state,
-      country: contactInformation.address.country
-    });
+    if (user) {
+      this.editProfileForm.patchValue({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        avatarUrl: user.avatarUrl
+      });
+    }
+    if (contactInformation) {
+      this.editProfileForm.patchValue({
+        email: contactInformation.email,
+        phoneNumber: contactInformation.phoneNumber,
+        address: contactInformation.address.address,
+        city: contactInformation.address.city,
+        zipCode: contactInformation.address.zipCode,
+        state: contactInformation.address.state,
+        country: contactInformation.address.country
+      });
 
-    if (typeof this.websitesURLs == 'undefined') {
-      for (let url of contactInformation.websitesURLs) {
-        this.addWebsiteURL(url);
+      if (typeof this.websitesURLs == 'undefined') {
+        for (let url of contactInformation.websitesURLs) {
+          this.addWebsiteURL(url);
+        }
       }
     }
-
   }
 
   private getUser() {
@@ -145,6 +155,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       .subscribe(
         (user: User) => {
           this.user = user;
+          this.initFormValues(user);
           if (this.user.contactInformationId) {
             this.getUserContactInformation(this.user.contactInformationId, user);
           }

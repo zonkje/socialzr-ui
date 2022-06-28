@@ -36,7 +36,7 @@ export class PostEditComponent implements OnInit {
     if (this.editMode) {
       let updatedPost: Post = this.postService.getPost(this.id);
       updatedPost['text'] = this.postForm.value['text'];
-      updatedPost['postLabels'] = this.postForm.value['labels'].split(',');
+      updatedPost['postLabels'] = this.postForm.value['labels'].length > 0 ? this.postForm.value['labels'].split(',') : [''];
       this.postService.updatePost(this.id, updatedPost);
     } else {
       const newPost = new Post(
@@ -44,8 +44,7 @@ export class PostEditComponent implements OnInit {
         null,
         null,
         this.postForm.value['text'],
-        null,
-        this.postForm.value['labels'].split(','),
+        null,this.postForm.value['labels'].split(','),
         null,
       );
       this.postService.addPost(newPost);
@@ -69,7 +68,7 @@ export class PostEditComponent implements OnInit {
 
     this.postForm = new FormGroup({
       'text': new FormControl(postText, Validators.required),
-      'labels': new FormControl(postLabels, Validators.required)
+      'labels': new FormControl(postLabels)
     });
   }
 }

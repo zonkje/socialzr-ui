@@ -19,6 +19,10 @@
               rows="3"
               formControlName="text"
             ></textarea>
+            <span
+              *ngIf="!postForm.get('text').valid && postForm.get('text').touched"
+              class="help-block"
+            >Post text is required.</span>
           </div>
         </div>
       </div>
@@ -29,7 +33,7 @@
             <input
               type="text"
               id="labels"
-              placeholder="Separate each with a comma"
+              placeholder="Separate each with a comma (e.g. 'IMPORTANT, PERSONAL, ADVICE')"
               class="form-control"
               formControlName="labels"
             >

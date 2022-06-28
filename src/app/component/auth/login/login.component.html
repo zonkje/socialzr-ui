@@ -10,6 +10,10 @@
           class="form-control"
           formControlName="username"
         >
+        <span
+          *ngIf="!signInForm.get('username').valid && signInForm.get('username').touched"
+          class="help-block"
+        >Please enter your username.</span>
       </div>
       <div class="form-group">
         <label for="password">Password</label>
@@ -19,6 +23,10 @@
           class="form-control"
           formControlName="password"
         >
+        <span
+          *ngIf="!signInForm.get('password').valid && signInForm.get('password').touched"
+          class="help-block"
+        >Please enter your password.</span>
       </div>
       <div>
         <button type="submit" class="btn btn-primary" [disabled]="!signInForm.valid">Sign in</button>

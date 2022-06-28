@@ -17,6 +17,10 @@
               class="form-control"
               formControlName="name"
             >
+            <span
+              *ngIf="!groupForm.get('name').valid && groupForm.get('name').touched"
+              class="help-block"
+            >Group name must be equal or greater than 3 and less than 48 characters.</span>
           </div>
         </div>
       </div>
@@ -30,7 +34,12 @@
               class="form-control"
               rows="2"
               formControlName="description"
+              placeholder="Some information about the group..."
             ></textarea>
+            <span
+              *ngIf="!groupForm.get('description').valid && groupForm.get('description').touched"
+              class="help-block"
+            >Group description is required.</span>
           </div>
         </div>
       </div>
@@ -53,10 +62,12 @@
           <img [src]="avatarUrl.value" class="img-responsive">
         </div>
       </div>
+      <label>Access level</label>
       <div class="radio" *ngFor="let accessLevel of accessLevels">
         <label>
           <input
             type="radio"
+            id="accessLevel"
             formControlName="accessLevel"
             [value]="accessLevel">{{ accessLevel }}
         </label>

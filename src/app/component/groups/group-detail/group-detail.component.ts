@@ -3,6 +3,8 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 
 import {GroupService} from 'src/app/service/group.service';
 import {Group} from '../../../model/group.model';
+import {User} from '../../../model/user.model';
+import {UserService} from '../../../service/user.service';
 
 @Component({
   selector: 'app-group-detail',
@@ -13,10 +15,12 @@ export class GroupDetailComponent implements OnInit {
   group: Group;
   id: number;
   loggedUserId: number;
+  creatorUsername: string = '';
 
   constructor(private groupService: GroupService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private userService: UserService) {
   }
 
   ngOnInit(): void {
@@ -26,6 +30,12 @@ export class GroupDetailComponent implements OnInit {
         (params: Params) => {
           this.id = +params['id'];
           this.group = this.groupService.getGroup(this.id);
+          this.userService.getUserById(this.group.creatorId)
+            .subscribe(
+              (user: User) => {
+                this.creatorUsername = user.username;
+              }
+            );
         }
       );
   }

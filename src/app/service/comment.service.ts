@@ -44,7 +44,7 @@ export class CommentService {
   }
 
   updateComment(newComment: PostComment) {
-    this.http.patch<PostComment>(environment.apiURL + this.entityName, newComment)
+    this.http.put<PostComment>(environment.apiURL + this.entityName, newComment)
       .subscribe(
         response => {
           this.getCommentsByPost(newComment.postId).subscribe();

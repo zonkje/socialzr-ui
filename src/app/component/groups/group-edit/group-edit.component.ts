@@ -77,11 +77,10 @@ export class GroupEditComponent implements OnInit {
 
     }
     this.groupForm = new FormGroup({
-      'name': new FormControl(groupName, Validators.required),
+      'name': new FormControl(groupName, [Validators.required, Validators.minLength(3), Validators.maxLength(48)]),
       'description': new FormControl(groupDescription, Validators.required),
-      'avatarUrl': new FormControl(groupAvatarUrl, [
-        Validators.required,
-        Validators.pattern(imgUrlRegex)]),
+      'avatarUrl': new FormControl(groupAvatarUrl,
+        Validators.pattern(imgUrlRegex)),
       'accessLevel': new FormControl(groupAccessLevel)
     });
   }

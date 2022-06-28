@@ -13,6 +13,10 @@
               rows="2"
               formControlName="text"
             ></textarea>
+            <span
+              *ngIf="!commentForm.get('text').valid && commentForm.get('text').touched"
+              class="help-block"
+            >Comment text is required.</span>
           </div>
         </div>
       </div>

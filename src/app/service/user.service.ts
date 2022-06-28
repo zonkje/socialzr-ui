@@ -55,8 +55,18 @@ export class UserService {
       );
   }
 
+  addUserContactInformation(contactInformation: UserContactInformation) {
+    this.http.post<User>(environment.apiURL + 'contact_information', contactInformation)
+      .subscribe(
+        response => {
+          this.getCurrentUser().subscribe();
+          this.currentUserChanged.next(this.currentUser);
+        }
+      );
+  }
+
   updateUser(user: User) {
-    this.http.patch<User>(environment.apiURL + this.entityName, user)
+    this.http.put<User>(environment.apiURL + this.entityName, user)
       .subscribe(
         response => {
           this.getCurrentUser().subscribe();
@@ -66,7 +76,7 @@ export class UserService {
   }
 
   updateUserContactInformation(contactInformation: UserContactInformation) {
-    this.http.patch<User>(environment.apiURL + 'contact_information', contactInformation)
+    this.http.put<User>(environment.apiURL + 'contact_information', contactInformation)
       .subscribe(
         response => {
           this.getCurrentUser().subscribe();

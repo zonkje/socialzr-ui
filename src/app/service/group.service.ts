@@ -39,7 +39,7 @@ export class GroupService {
   }
 
   updateGroup(index: number, newGroup: Group) {
-    this.http.patch<Group>('http://localhost:8080/api/v1/social_group', newGroup)
+    this.http.put<Group>('http://localhost:8080/api/v1/social_group', newGroup)
       .subscribe(
         response => {
           this.getGroups().subscribe();
